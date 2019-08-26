@@ -168,6 +168,86 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-python命令小记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/26/python命令小记/">python命令小记</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/26/python命令小记/" class="archive-article-date">
+  	<time datetime="2019-08-26T03:33:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>输出：<br>print(“xxx”) #文本<br>print(5+3) #直接输出8<br>print(“猪”+”兔”) #输出猪兔<br>print(“猪兔”*8) #输出猪兔猪兔猪兔猪兔猪兔猪兔猪兔猪兔</p>
+<p>输入：<br>a=input(“请输入”)</p>
+<p>条件分支：<br>if:<br>  xxxxx<br>else:<br>  xxxxx</p>
+<p>循环：<br>while a != 8:<br>  xxx<br>  xxx<br>  xxx</p>
+<p>字符串:<br>tutu=’minmin’ #tutu为变量，存储字符串’minmin’<br>str=r’/n’ #输出str显示/n，r表示原始字符串，忽略转意符/</p>
+<p>变量:<br>使用前需赋值，不能以数字开题，区分大小写</p>
+<p>转意符：<br><br>print(‘let&#39;s go’) #输出let’s go</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/26/python命令小记/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-为hexo博文添加图片" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -300,7 +380,7 @@
 <p>其运行方式如下图：</p>
 <p><img src="/2019/08/25/机器人路径规划—PRM与RRT/5.gif" alt="RRT运行方式"></p>
 <p>RRT是一种多维空间中有效率的规划方法。它以一个初始点作为根节点，通过随机采样增加叶子节点的方式，生成一个随机扩展树，当随机树中的叶子节点包含了目标点或进入了目标区域，便可以在随机树中找到一条由从初始点到目标点的路径。基本RRT算法如下面伪代码所示：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> 1 function BuildRRT(qinit, K, Δq)</span><br><span class="line"> 2     T.init(qinit)</span><br><span class="line"> 3     for k = 1 to K</span><br><span class="line"> 4         qrand = Sample()  -- chooses a random configuration</span><br><span class="line"> 5         qnearest = Nearest(T, qrand) -- selects the node in the RRT tree that is closest to qrand</span><br><span class="line"> 6         if  Distance(qnearest, qgoal) &lt; Threshold then</span><br><span class="line"> 7             return true</span><br><span class="line"> 8         qnew = Extend(qnearest, qrand, Δq)  -- moving from qnearest an incremental distance in the direction of qrand</span><br><span class="line"> 9         if qnew ≠ NULL then</span><br><span class="line">10             T.AddNode(qnew)</span><br><span class="line">11     return false</span><br><span class="line">12 </span><br><span class="line">13 </span><br><span class="line">14 function Sample() -- Alternatively,one could replace Sample with SampleFree(by using a collision detection algorithm to reject samples in C_obstacle</span><br><span class="line">15     p = Random(0, 1.0)</span><br><span class="line">16     if 0 &lt; p &lt; Prob then</span><br><span class="line">17         return qgoal</span><br><span class="line">18     elseif Prob &lt; p &lt; 1.0 then</span><br><span class="line">19         return RandomNode()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function BuildRRT(qinit, K, Δq)</span><br><span class="line">    T.init(qinit)</span><br><span class="line">    for k = 1 to K</span><br><span class="line">        qrand = Sample()  -- chooses a random configuration</span><br><span class="line">        qnearest = Nearest(T, qrand) -- selects the node in the RRT tree that is closest to qrand</span><br><span class="line">        if  Distance(qnearest, qgoal) &lt; Threshold then</span><br><span class="line">            return true</span><br><span class="line">        qnew = Extend(qnearest, qrand, Δq)  -- moving from qnearest an incremental distance in the direction of qrand</span><br><span class="line">        if qnew ≠ NULL then</span><br><span class="line">            T.AddNode(qnew)</span><br><span class="line">    return false</span><br><span class="line"></span><br><span class="line">function Sample() -- Alternatively,one could replace Sample with SampleFree(by using a collision detection algorithm to reject samples in C_obstacle</span><br><span class="line">    p = Random(0, 1.0)</span><br><span class="line">    if 0 &lt; p &lt; Prob then</span><br><span class="line">        return qgoal</span><br><span class="line">    elseif Prob &lt; p &lt; 1.0 then</span><br><span class="line">        return RandomNode()</span><br></pre></td></tr></table></figure>
 
 <p>初始化时随机树T只包含一个节点：根节点qinit。首先Sample函数从状态空间中随机选择一个采样点qrand（4行）；然后Nearest函数从随机树中选择一个距离qrand最近的节点qnearest（5行）；最后Extend函数通过从qnearest向qrand扩展一段距离，得到一个新的节点qnew（8行）。如果qnew与障碍物发生碰撞，则Extend函数返回空，放弃这次生长，否则将qnew加入到随机树中。重复上述步骤直到qnearest和目标点qgaol距离小于一个阈值，则代表随机树到达了目标点，算法返回成功（6~7行）。为了使算法可控，可以设定运行时间上限或搜索次数上限（3行）。如果在限制次数内无法到达目标点，则算法返回失败。<br>为了加快随机树到达目标点的速度，简单的改进方法是：在随机树每次的生长过程中，根据随机概率来决定qrand是目标点还是随机点。在Sample函数中设定参数Prob，每次得到一个0到1.0的随机值p，当0&lt;p&lt;Prob的时候，随机树朝目标点生长行；当Prob&lt;p&lt;1.0时，随机树朝一个随机方向生长。</p>
 <p>上述算法的效果是随机采样点会“拉着”树向外生长，这样能更快、更有效地探索空间（The effect is that the nearly uniformly distributed samples “pull” the tree toward them, causing the tree to rapidly exploreC-Space）。随机探索也讲究策略，如果我们从树中随机取一个点，然后向着随机的方向生长，那么结果是什么样的呢？见下图（Left: A tree generated by applying a uniformly-distributed random motion from a randomly chosen tree node does not explore very far. Right: A tree generated by the RRT algorithm using samples drawn randomly from a uniform distribution. Both trees have 2000 nodes ）。可以看到，同样是随机树，但是这棵树并没很好地探索空间。</p>
@@ -563,6 +643,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">robot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
             
             <div class="clearfix"></div>
