@@ -168,6 +168,170 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-python技巧" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/06/python技巧/">python技巧</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/06/python技巧/" class="archive-article-date">
+  	<time datetime="2019-10-06T07:49:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-ipdb安装命令"><a href="#1-ipdb安装命令" class="headerlink" title="1.ipdb安装命令"></a>1.ipdb安装命令</h3><figure class="highlight plain"><figcaption><span>install ipdb```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">但该命令会安装失败，更改命令</span><br><span class="line"></span><br><span class="line">```pip install ipdb -- user</span><br></pre></td></tr></table></figure>
+
+<p>安装成功</p>
+<h3 id="2-ipdb的具体使用方法"><a href="#2-ipdb的具体使用方法" class="headerlink" title="2.ipdb的具体使用方法"></a>2.ipdb的具体使用方法</h3><p>程序在待调试处插入命令</p>
+<figure class="highlight plain"><figcaption><span>ipdb;ipdb.set_trace()```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">当程序运行到该命令处，会自动暂定，进入调试环境</span><br><span class="line"></span><br><span class="line">常用命令`n`，可执行暂停处的后一条语句</span><br><span class="line"></span><br><span class="line">常用命令`c`，可从暂停处继续执行，若后面再次遇到```ipdb.set_trace()```命令，则再次进入调试环境</span><br><span class="line"></span><br><span class="line">### 3.ipython调试方法</span><br><span class="line"></span><br><span class="line">python自带了ipython调试器，无需安装，具体使用方法为，在待调试处插入</span><br><span class="line"></span><br><span class="line">```import IPython ; IPython.embed()</span><br></pre></td></tr></table></figure>
+
+<p>当代码跳转到调试代码处，会自动暂定，此时可输入调试代码。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/06/python技巧/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-osr例题技巧" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/06/osr例题技巧/">osr例题技巧</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/06/osr例题技巧/" class="archive-article-date">
+  	<time datetime="2019-10-06T07:40:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-显示所能调用的方法"><a href="#1-显示所能调用的方法" class="headerlink" title="1.显示所能调用的方法"></a>1.显示所能调用的方法</h3><p>例题中的所有boxes均有可以调用的方法，若需要显示出某个boxes所能调用的所有方法，在ipython或ipdb中输入<code>box.</code>后按TAB按钮，可以显示出所有能调用的方法。</p>
+<h3 id="2-如何指定某个特定的box"><a href="#2-如何指定某个特定的box" class="headerlink" title="2.如何指定某个特定的box"></a>2.如何指定某个特定的box</h3><p>例题中，box是一个osr环境中的实体，生成后被全部存储在列表boxes中，若需要指定某个特定的box,可通过命令<code>boxes[20]</code>来实现，[  ]中为指定box的序号，box能使用的所有方法均适用于<code>boxes[20]</code></p>
+<h3 id="3-调用方法时的注意事项"><a href="#3-调用方法时的注意事项" class="headerlink" title="3.调用方法时的注意事项"></a>3.调用方法时的注意事项</h3><p>在调用方法时，一定要在某方法的末尾加上括号，如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">若不加括号，不会返回正常值，会返回</span><br><span class="line"></span><br><span class="line">```&lt;bound method KinBody.GetTransform of RaveGetEnvironment(1).GetKinBody(&apos;box40&apos;)&gt;</span><br></pre></td></tr></table></figure>
+
+<p>在加上括号后则会返回正常值。</p>
+<h3 id="4-获取抓取目标的旋转矩阵方法"><a href="#4-获取抓取目标的旋转矩阵方法" class="headerlink" title="4.获取抓取目标的旋转矩阵方法"></a>4.获取抓取目标的旋转矩阵方法</h3><p>对于每一个抓取目标，都需要获取其旋转矩阵与空间位置参数，空间位置参数很好获得，目标的原始旋转矩阵也能获得，因为每个目标都是一个实体，直接调用方法获得相关参数即可。</p>
+<p>但是，获取的空间位置参数是唯一对应的，但旋转举证需要作一些修正才能作为ikfast求解器的目标求解矩阵。因为每一个box的旋转矩阵如下:</p>
+<p><img src="/2019/10/06/osr例题技巧/1.png" alt="1"></p>
+<p>由于box的旋转矩阵$T_b$轴是朝上的，但是对于机器人末端，ikfst求解器需要得到的旋转矩阵$T_k$是Z轴朝下的，这样才能获取正常的求解，同时不能只修改旋转矩阵$T_b$的Z轴使其朝下，需要通过绕X轴旋转的方式来获得Z轴朝下的旋转矩阵$T_k$，因此，需要将原box旋转矩阵右乘一个变换矩阵$T_s$，得到最终ikfast求解器需要的矩阵：<br>$$<br>T_k=T_b\cdot T_a<br>$$<br>其中:<br>$$<br>T_b = \left[<br>\matrix{<br>  1 &amp; 0 &amp; 0 &amp; 0\<br>  0 &amp; -1 &amp; 0 &amp; 0\<br>  0 &amp; 0 &amp; -1 &amp; 0\<br>  0 &amp; 0 &amp; 0 &amp; 1<br>}<br>\right]<br>$$<br>旋转后的矩阵$T_b$如下：</p>
+<p><img src="/2019/10/06/osr例题技巧/2.png" alt="2"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">robot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/06/osr例题技巧/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-python命令小记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
