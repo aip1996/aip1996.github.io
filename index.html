@@ -168,24 +168,36 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-toppra论文阅读（一）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-toppra安装步骤及相关问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/15/toppra安装步骤及相关问题/">toppra安装步骤及相关问题</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/15/toppra安装步骤及相关问题/" class="archive-article-date">
+  	<time datetime="2019-10-15T14:30:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-15</time>
+</a>
+        
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="toppra论文阅读（一）"><a href="#toppra论文阅读（一）" class="headerlink" title="toppra论文阅读（一）"></a>toppra论文阅读（一）</h3><p>####　1.toppra概述</p>
-<p>toppra是Time-Optimal Path Parameterization Based on Reachability Analysis的简称，即”基于可达性分析的时间最优路径参数化“。toppra是为了解决TOPP（时间最优路径参数化）的问题而诞生的。TOPP是机器人技术中一个经过充分研究的问题，具有广泛的应用范围。 解决TOPP的方法主要有两种：数值积分（NI）和凸优化（CO）。基于NI的方法虽然速度快，但是难以解决较复杂的问题，鲁棒性差。基于CO的方法虽然鲁棒性更强，但是所花的时间会长很多。toppra方法在速度与鲁棒性上具有明显的优势，相比基于NI的方法更快，具有与基于CO的方法相同的鲁棒性，成功率为100%，并且经过了广泛的实验证明。</p>
-<h4 id="2-广义约束-Generalized-Constraints"><a href="#2-广义约束-Generalized-Constraints" class="headerlink" title="2.广义约束(Generalized Constraints)"></a>2.广义约束(Generalized Constraints)</h4><p>对于任意的n自由度机器人系统，在构型空间中，其姿态都由一个n维向量$\mathbf{q} $来表示，其表示为$\mathbf{q} \in \mathbb{R}^{n}$，构型空间中的集合路径可以用函数$\mathbf{q}(s)<em>{s \in\left[0, s</em>{\mathrm{end}}\right.}$来表示，如果$\mathbf{q}(s)$是连续并且分段的，那么设$s$是时间映射，即$s:[0, T] \rightarrow\left[0, s_{\mathrm{end}}\right]$，那么，机器人的轨迹就可以表示为$\mathbf{q}(s(t))_{t \in[0, T]}$。</p>
-<p>在toppra的论文中，考虑的机器人约束为广义的二阶约束，为：<br>$$<br>\mathbf{A}(\mathbf{q}) \ddot{\mathbf{q}}+\dot{\mathbf{q}}^{\top} \mathbf{B}(\mathbf{q}) \dot{\mathbf{q}}+\mathbf{f}(\mathbf{q}) \in \mathscr{C}(\mathbf{q})<br>$$<br>我们暂时不对此约束进行探讨，只认为该约束为路径集合$\mathbf{q} $所需要满足的条件，其中$\dot{\mathbf{q}}$为$\mathbf{q} $的一阶倒数，反映为机器人的速度，其中$\ddot{\mathbf{q}}$为$\mathbf{q} $的二阶倒数，反映为机器人的加速度。因此以上函数约束了机器人的关节转角，速度，加速度，此外对机器人的关节扭矩界限、接触稳定性、库伦摩擦模等因素也有约束。</p>
-<p>机器人的一阶约束可表示为：<br>$$<br>\mathbf{A}^{v}(\mathbf{q}) \dot{\mathbf{q}}+\mathbf{f}^{v}(\mathbf{q}) \in \mathscr{C}^{v}(\mathbf{q})<br>$$<br>同样，我们不对其作太多讨论，只认为其为机器人所需满足的条件。</p>
-<h4 id="3-将约束映射到机器人路径上"><a href="#3-将约束映射到机器人路径上" class="headerlink" title="3.将约束映射到机器人路径上"></a>3.将约束映射到机器人路径上</h4><p>如果对$\mathbf{q}(s)$进行连续的微分，我们可以得到：<br>$$<br>\dot{\mathbf{q}}=\mathbf{q}^{\prime} \dot{\boldsymbol{s}}, \quad \ddot{\mathbf{q}}=\mathbf{q}^{\prime \prime} \dot{s}^{2}+\mathbf{q}^{\prime} \ddot{s}<br>$$<br>此处需要认识到的是，$\mathbf{q}$是$\boldsymbol{s}$的函数，而$\boldsymbol{s}$是时间$T$的映射，其中，$\square^{\prime}$表示相对于路径参数的微分，$\dot{\boldsymbol{s}}$</p>
-<p>表示相对于时间的微分。其中，$\boldsymbol{s}$，$\dot{\boldsymbol{s}}$和$\ddot{\boldsymbol{s}}$分别表示为位置、速度与加速度。如果将$\boldsymbol{s}$，$\dot{\boldsymbol{s}}$和$\ddot{\boldsymbol{s}}$带入二阶约束中，二阶约束将变为对$\boldsymbol{s}$，$\dot{\boldsymbol{s}}$和$\ddot{\boldsymbol{s}}$三个参数的约束，带入后的形式如下：<br>$$<br>\begin{aligned} &amp; \mathbf{a}(s) \ddot{s}+\mathbf{b}(s) \dot{s}^{2}+\mathbf{c}(s) \in \mathscr{C}(s), \text { where } \ \mathbf{a}(s) &amp;:=\mathbf{A}(\mathbf{q}(s)) \mathbf{q}^{\prime}(s) \ \mathbf{b}(s) &amp;:=\mathbf{A}(\mathbf{q}(s)) \mathbf{q}^{\prime \prime}(s)+\mathbf{q}^{\prime}(s)^{\top} \mathbf{B}(\mathbf{q}(s)) \mathbf{q}^{\prime}(s) \ \mathbf{c}(s) &amp;:=\mathbf{f}(\mathbf{q}(s)) \ \mathscr{C}(s) &amp;:=\mathscr{C}(\mathbf{q}(s)) \end{aligned}<br>$$<br>一阶约束也有相似的变化：<br>$$<br>\begin{aligned} \mathbf{a}^{v}(s) \dot{s}+&amp; \mathbf{b}^{v}(s) \in \mathscr{C}^{v}(s), \text { where } \ \mathbf{a}^{v}(s) &amp;:=\mathbf{A}^{v}(\mathbf{q}(s)) \mathbf{q}^{\prime}(s) \ \mathbf{b}^{v}(s) &amp;:=\mathbf{f}^{v}(\mathbf{q}(s)) \ \mathscr{C}^{v}(s) &amp;:=\mathscr{C}^{v}(\mathbf{q}(s)) \end{aligned}<br>$$</p>
-<h4 id="4-二阶约束的公式变化"><a href="#4-二阶约束的公式变化" class="headerlink" title="4.二阶约束的公式变化"></a>4.二阶约束的公式变化</h4><p>二阶约束也可以写成以下形式：<br>$$<br>\begin{array}{c}{\mathbf{A}(q) \ddot{q}+q^{\top} \mathbf{B}(q) \dot{q}+\mathbf{f}(q)=\boldsymbol{I}(q, \dot{q}, \ddot{q})}\ {\mathbf{F}(q) \boldsymbol{I}(q, \dot{q}, \ddot{q}) \leq \mathbf{g}(q)}\end{array}<br>$$<br>这是二阶约束未带入$\boldsymbol{s}$，$\dot{\boldsymbol{s}}$和$\ddot{\boldsymbol{s}}$前的一种形式。</p>
-<p>如果我们将$q, \dot{q}, \ddot{q}$替换为$x,y,z$,则原方程变为：<br>$$<br>{\mathbf{A}(x) z+y^{\top} \mathbf{B}(x) y+\mathbf{c}(x)=\boldsymbol{I}(x, y, z)}<br>$$<br>由于之前有约定：<br>$$<br>\begin{array}{l}{\mathbf{a}(s):=\mathbf{A}(\mathbf{q}(s)) \mathbf{q}^{\prime}(s)} \ {\mathbf{b}(s):=\mathbf{A}(\mathbf{q}(s)) \mathbf{q}^{\prime \prime}(s)+\mathbf{q}^{\prime}(s)^{\top} \mathbf{B}(\mathbf{q}(s)) \mathbf{q}^{\prime}(s)} \ {\mathbf{c}(s):=\mathbf{f}(\mathbf{q}(s))} \end{array}<br>$$<br>若要得到$\mathbf{a}(s),\mathbf{ｂ}(s),\mathbf{c}(s)$与$\boldsymbol{I}(x, y, z)$之间的关系，可通过以下方式求得：</p>
-<p>1)．<br>$$<br>\boldsymbol{I}(\boldsymbol{q}(s), 0, 0)=\boldsymbol{f}(\boldsymbol{q}(s))=\boldsymbol{c}(s)<br>$$<br>2).<br>$$<br>\boldsymbol{I}(\boldsymbol{q}(s), 0, \boldsymbol{q}^{\prime}(s))=\mathbf{A}(\mathbf{q}(s)) \mathbf{q}^{\prime}(s)+\boldsymbol{f}(\boldsymbol{q}(s))=\mathbf{a}(s)+\mathbf{c}(s)<br>$$<br>可得：<br>$$<br>\mathbf{a}(s)＝\boldsymbol{I}(\boldsymbol{q}(s), 0, \boldsymbol{q}^{\prime}(s))－\mathbf{c}(s)<br>$$<br>3).<br>$$<br>\boldsymbol{I}(\boldsymbol{q}(s), \boldsymbol{q}^{\prime}(s), \boldsymbol{q}^{\prime\prime}(s))=\mathbf{A}(\mathbf{q}(s)) \mathbf{q}^{\prime \prime}(s)+\mathbf{q}^{\prime}(s)^{\top}\mathbf{B}(\mathbf{q}(s)) \mathbf{q}^{\prime}(s) ＋\boldsymbol{f}(\boldsymbol{q}(s))=\mathbf{b}(s)+\mathbf{c}(s)<br>$$<br>可得：<br>$$<br>\mathbf{b}(s)＝\boldsymbol{I}(\boldsymbol{q}(s), \boldsymbol{q}^{\prime}(s), \boldsymbol{q}^{\prime\prime}(s))－\mathbf{c}(s)<br>$$<br>综上：<br>$$<br>\mathbf{a}(s)＝\boldsymbol{I}(\boldsymbol{q}(s), 0, \boldsymbol{q}^{\prime}(s))－\mathbf{c}(s)　\<br>\mathbf{b}(s)＝\boldsymbol{I}(\boldsymbol{q}(s), \boldsymbol{q}^{\prime}(s), \boldsymbol{q}^{\prime\prime}(s))－\mathbf{c}(s) \<br>\boldsymbol{c}(s)=\boldsymbol{I}(\boldsymbol{q}(s), 0, 0)<br>$$</p>
-<h4 id="5-路径参数化"><a href="#5-路径参数化" class="headerlink" title="5.路径参数化"></a>5.路径参数化</h4><p>类似基于CO的方法，我们将区间$\left[0, s_{\mathrm{end}}\right]$划分为$N$个片段和$N+1$个网格点：<br>$$<br>0=: s_{0}, s_{1} \dots s_{N-1}, s_{N}:=s_{\mathrm{end}}<br>$$<br>区间$\left[0, s_{\mathrm{end}}\right]$上的连续路劲加速度用$u_{i}$表示，在$s_{i}$点的速度的平方$\dot{\boldsymbol{s}}<em>{i}^{2}$用$x</em>{i}$表示，并且它们之间存在以下关系：<br>$$<br>x_{i+1}=x_{i}+2 \Delta_{i} u_{i}, \quad i=0 \ldots N-1 \label{eq:speciality}<br>$$<br>其中：<br>$$<br>\Delta_{i}:=s_{i+1}-s_{i}<br>$$<br>之所以有这样的推导结果，是由于：<br>$$<br>\frac{\mathrm{d} \dot{s}^{2}}{\mathrm{d} s}=2 \dot{s} \frac{\mathrm{d} \dot{s}}{\mathrm{d} s}=2\frac{\mathrm{d} s}{\mathrm{d} t} \frac{\mathrm{d} \dot{s}}{\mathrm{d} s}=2\frac{\mathrm{d} \dot{s}}{\mathrm{d} t}=2 \ddot{s}=2 u<br>$$<br>随后，我们称$s_{i}$为$i$ -stage，称$u_{i}$ 和 $x_{i}$分别为$i$ -stage下的控制与状态，任意满足以上的线性关系的序列$x_{0}, u_{0}, \ldots, x_{N-1}, u_{N-1}$均可被称为一个路径参数化。</p>
-<p>只有当一个参数化满在区间$\left[0, s_{\mathrm{end}}\right]$上的每一个点都满足约束条件时，一个参数化才是合理的。将这些要求引入离散集合的一个可行方法是搭配离散的组合，即：对于每一个离散的位置$s_{i}$，都要评估连续性约束，并且需要控制$u_{i}$ 与状态$x_{i}$满足：<br>$$<br>\mathbf{a}<em>{i} u</em>{i}+\mathbf{b}<em>{i} x</em>{i}+\mathbf{c}<em>{i} \in \mathscr{C}</em>{i}<br>$$</p>
-<p>$$<br>\text { 其中 } \mathbf{a}<em>{i}:=\mathbf{a}\left(s</em>{i}\right), \mathbf{b}<em>{i}:=\mathbf{b}\left(s</em>{i}\right), \mathbf{c}<em>{i}:=\mathbf{c}\left(s</em>{i}\right), \mathscr{C}<em>{i}:=\mathscr{C}\left(s</em>{i}\right)<br>$$</p>
+        <h3 id="toppra安装步骤及相关问题"><a href="#toppra安装步骤及相关问题" class="headerlink" title="toppra安装步骤及相关问题"></a>toppra安装步骤及相关问题</h3><h4 id="1-toppra安装"><a href="#1-toppra安装" class="headerlink" title="1.toppra安装"></a>1.toppra安装</h4><p>终端运行命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/安装目录/ &amp;&amp; cd ~/安装目录/ &amp;&amp; git clone git@github.com:hungpham2511/qpOASES</span><br><span class="line">cd qpOASES/ &amp;&amp; mkdir bin &amp;&amp; make</span><br><span class="line">cd interfaces/python/ &amp;&amp; pip install cython --user</span><br><span class="line">python setup.py install --user</span><br><span class="line">cd ~/安装目录/ &amp;&amp; git clone git@github.com:hungpham2511/toppra &amp;&amp; cd toppra/</span><br><span class="line">pip install -r requirements.txt --user</span><br><span class="line">python setup.py install --user</span><br><span class="line">cd &apos;~/安装目录/toppra/examples&apos; &amp;&amp; python cartesian_accel.py</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-相关问题"><a href="#2-相关问题" class="headerlink" title="2.相关问题"></a>2.相关问题</h4><h5 id="1-安装依赖时出错-（pip-install-r-requirements-txt-–user）"><a href="#1-安装依赖时出错-（pip-install-r-requirements-txt-–user）" class="headerlink" title="(1)安装依赖时出错 （pip install -r requirements.txt –user）"></a>(1)安装依赖时出错 （pip install -r requirements.txt –user）</h5><p>可能的解决办法：</p>
+<p>一、使用命令sudo pip install -r requirements.txt –user</p>
+<p>二、使用命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py</span><br><span class="line">python2.7 get-pip.py --force-reinstall</span><br></pre></td></tr></table></figure>
+
+<p>重新安装pip</p>
+<h5 id="2-依赖安装完毕后，调试代码时，显示ImportError-cannot-import-name-CubicSpline"><a href="#2-依赖安装完毕后，调试代码时，显示ImportError-cannot-import-name-CubicSpline" class="headerlink" title="2)依赖安装完毕后，调试代码时，显示ImportError: cannot import name CubicSpline"></a>2)依赖安装完毕后，调试代码时，显示<code>ImportError: cannot import name CubicSpline</code></h5><p>这是由于虽然安装了最新依赖，但实际调用的任为老版本的scipy造成的，需要在路径<code>home/aip/.local/lib/pytho2.7/site-packages</code>下删除所有scipy相关文件后，再使用命令<code>pip install -r requirements.txt --user</code>安装。</p>
 
       
 
@@ -194,11 +206,22 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">robot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/15/toppra论文阅读（一）/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/10/15/toppra安装步骤及相关问题/">展开全文 >></a>
         </p>
       
 
@@ -228,21 +251,45 @@
 
 
   
-    <article id="post-toppra安装步骤及相关问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-toppra论文阅读（一）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/15/toppra论文阅读（一）/">toppra论文阅读（一）</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/15/toppra论文阅读（一）/" class="archive-article-date">
+  	<time datetime="2019-10-15T14:30:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-15</time>
+</a>
+        
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="toppra安装步骤及相关问题"><a href="#toppra安装步骤及相关问题" class="headerlink" title="toppra安装步骤及相关问题"></a>toppra安装步骤及相关问题</h3><h4 id="1-toppra安装"><a href="#1-toppra安装" class="headerlink" title="1.toppra安装"></a>1.toppra安装</h4><p>终端运行命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/安装目录/ &amp;&amp; cd ~/安装目录/ &amp;&amp; git clone git@github.com:hungpham2511/qpOASES</span><br><span class="line">cd qpOASES/ &amp;&amp; mkdir bin &amp;&amp; make</span><br><span class="line">cd interfaces/python/ &amp;&amp; pip install cython --user</span><br><span class="line">python setup.py install --user</span><br><span class="line">cd ~/安装目录/ &amp;&amp; git clone git@github.com:hungpham2511/toppra &amp;&amp; cd toppra/</span><br><span class="line">pip install -r requirements.txt --user</span><br><span class="line">python setup.py install --user</span><br><span class="line">cd &apos;~/安装目录/toppra/examples&apos; &amp;&amp; python cartesian_accel.py</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-相关问题"><a href="#2-相关问题" class="headerlink" title="2.相关问题"></a>2.相关问题</h4><h5 id="1-安装依赖时出错-（pip-install-r-requirements-txt-–user）"><a href="#1-安装依赖时出错-（pip-install-r-requirements-txt-–user）" class="headerlink" title="(1)安装依赖时出错 （pip install -r requirements.txt –user）"></a>(1)安装依赖时出错 （pip install -r requirements.txt –user）</h5><p>可能的解决办法：</p>
-<p>一、使用命令sudo pip install -r requirements.txt –user</p>
-<p>二、使用命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py</span><br><span class="line">python2.7 get-pip.py --force-reinstall</span><br></pre></td></tr></table></figure>
-
-<p>重新安装pip</p>
-<h5 id="2-依赖安装完毕后，调试代码时，显示ImportError-cannot-import-name-CubicSpline"><a href="#2-依赖安装完毕后，调试代码时，显示ImportError-cannot-import-name-CubicSpline" class="headerlink" title="2)依赖安装完毕后，调试代码时，显示ImportError: cannot import name CubicSpline"></a>2)依赖安装完毕后，调试代码时，显示<code>ImportError: cannot import name CubicSpline</code></h5><p>这是由于虽然安装了最新依赖，但实际调用的任为老版本的scipy造成的，需要在路径<code>home/aip/.local/lib/pytho2.7/site-packages</code>下删除所有scipy相关文件后，再使用命令<code>pip install -r requirements.txt --user</code>安装。</p>
+        <h3 id="toppra论文阅读（一）"><a href="#toppra论文阅读（一）" class="headerlink" title="toppra论文阅读（一）"></a>toppra论文阅读（一）</h3><h4 id="1-toppra概述"><a href="#1-toppra概述" class="headerlink" title="1.toppra概述"></a>1.toppra概述</h4><p>toppra是Time-Optimal Path Parameterization Based on Reachability Analysis的简称，即”基于可达性分析的时间最优路径参数化“。toppra是为了解决TOPP（时间最优路径参数化）的问题而诞生的。TOPP是机器人技术中一个经过充分研究的问题，具有广泛的应用范围。 解决TOPP的方法主要有两种：数值积分（NI）和凸优化（CO）。基于NI的方法虽然速度快，但是难以解决较复杂的问题，鲁棒性差。基于CO的方法虽然鲁棒性更强，但是所花的时间会长很多。toppra方法在速度与鲁棒性上具有明显的优势，相比基于NI的方法更快，具有与基于CO的方法相同的鲁棒性，成功率为100%，并且经过了广泛的实验证明。</p>
+<h4 id="2-广义约束-Generalized-Constraints"><a href="#2-广义约束-Generalized-Constraints" class="headerlink" title="2.广义约束(Generalized Constraints)"></a>2.广义约束(Generalized Constraints)</h4><p>对于任意的n自由度机器人系统，在构型空间中，其姿态都由一个n维向量$\mathbf{q} $来表示，其表示为$\mathbf{q} \in \mathbb{R}^{n}$，构型空间中的集合路径可以用函数$\mathbf{q}(s)_ {s \in[0, s_{\mathrm{end}}]}$来表示，如果$\mathbf{q}(s)$是连续并且分段的，那么设$s$是时间映射，即$s:[0, T] \rightarrow\left[0, s_{\mathrm{end}}\right]$，那么，机器人的轨迹就可以表示为$\mathbf{q}(s(t))_{t \in[0, T]}$。</p>
+<p>在toppra的论文中，考虑的机器人约束为广义的二阶约束，为：<br>$$<br>\mathbf{A}(\mathbf{q}) \ddot{\mathbf{q}}+\dot{\mathbf{q}}^{\top} \mathbf{B}(\mathbf{q}) \dot{\mathbf{q}}+\mathbf{f}(\mathbf{q}) \in \mathscr{C}(\mathbf{q})<br>$$<br>我们暂时不对此约束进行探讨，只认为该约束为路径集合$\mathbf{q} $所需要满足的条件，其中$\dot{\mathbf{q}}$为$\mathbf{q} $的一阶倒数，反映为机器人的速度，其中$\ddot{\mathbf{q}}$为$\mathbf{q} $的二阶倒数，反映为机器人的加速度。因此以上函数约束了机器人的关节转角，速度，加速度，此外对机器人的关节扭矩界限、接触稳定性、库伦摩擦模等因素也有约束。</p>
+<p>机器人的一阶约束可表示为：<br>$$<br>\mathbf{A}^{v}(\mathbf{q}) \dot{\mathbf{q}}+\mathbf{f}^{v}(\mathbf{q}) \in \mathscr{C}^{v}(\mathbf{q})<br>$$<br>同样，我们不对其作太多讨论，只认为其为机器人所需满足的条件。</p>
+<h4 id="3-将约束映射到机器人路径上"><a href="#3-将约束映射到机器人路径上" class="headerlink" title="3.将约束映射到机器人路径上"></a>3.将约束映射到机器人路径上</h4><p>如果对$\mathbf{q}(s)$进行连续的微分，我们可以得到：<br>$$<br>\dot{\mathbf{q}}=\mathbf{q}^{\prime} \dot{\boldsymbol{s}}, \quad \ddot{\mathbf{q}}=\mathbf{q}^{\prime \prime} \dot{s}^{2}+\mathbf{q}^{\prime} \ddot{s}<br>$$<br>此处需要认识到的是，$\mathbf{q}$是$\boldsymbol{s}$的函数，而$\boldsymbol{s}$是时间$T$的映射，其中，$\square^{\prime}$表示相对于路径参数的微分，$\dot{\boldsymbol{s}}$表示相对于时间的微分。其中，$\boldsymbol{s}$，$\dot{\boldsymbol{s}}$和$\ddot{\boldsymbol{s}}$分别表示为位置、速度与加速度。如果将$\boldsymbol{s}$，$\dot{\boldsymbol{s}}$和$\ddot{\boldsymbol{s}}$带入二阶约束中，二阶约束将变为对$\boldsymbol{s}$，$\dot{\boldsymbol{s}}$和$\ddot{\boldsymbol{s}}$三个参数的约束，带入后的形式如下：</p>
+<p>$$<br>\begin{aligned} &amp; \mathbf{a}(s) \ddot{s}+\mathbf{b}(s) \dot{s}^{2}+\mathbf{c}(s) \in \mathscr{C}(s), \text { where } \\ \mathbf{a}(s) &amp;:=\mathbf{A}(\mathbf{q}(s)) \mathbf{q}^{\prime}(s) \\ \mathbf{b}(s) &amp;:=\mathbf{A}(\mathbf{q}(s)) \mathbf{q}^{\prime \prime}(s)+\mathbf{q}^{\prime}(s)^{\top} \mathbf{B}(\mathbf{q}(s)) \mathbf{q}^{\prime}(s) \\ \mathbf{c}(s) &amp;:=\mathbf{f}(\mathbf{q}(s)) \\ \mathscr{C}(s) &amp;:=\mathscr{C}(\mathbf{q}(s)) \end{aligned}<br>$$<br>一阶约束也有相似的变化：<br>$$<br>\begin{aligned} \mathbf{a}^{v}(s) \dot{s}+&amp; \mathbf{b}^{v}(s) \in \mathscr{C}^{v}(s), \text { where } \\ \mathbf{a}^{v}(s) &amp;:=\mathbf{A}^{v}(\mathbf{q}(s)) \mathbf{q}^{\prime}(s) \\ \mathbf{b}^{v}(s) &amp;:=\mathbf{f}^{v}(\mathbf{q}(s)) \\ \mathscr{C}^{v}(s) &amp;:=\mathscr{C}^{v}(\mathbf{q}(s)) \end{aligned}<br>$$</p>
+<h4 id="4-二阶约束的公式变化"><a href="#4-二阶约束的公式变化" class="headerlink" title="4.二阶约束的公式变化"></a>4.二阶约束的公式变化</h4><p>二阶约束也可以写成以下形式：<br>$$<br>\begin{array}{c}{\mathbf{A}(q) \ddot{q}+q^{\top} \mathbf{B}(q) \dot{q}+\mathbf{f}(q)=\boldsymbol{I}(q, \dot{q}, \ddot{q})}\ {\mathbf{F}(q) \boldsymbol{I}(q, \dot{q}, \ddot{q}) \leq \mathbf{g}(q)}\end{array}<br>$$<br>这是二阶约束未带入$\boldsymbol{s}$，$\dot{\boldsymbol{s}}$和$\ddot{\boldsymbol{s}}$前的一种形式。</p>
+<p>如果我们将$q, \dot{q}, \ddot{q}$替换为$x,y,z$,则原方程变为：<br>$$<br>{\mathbf{A}(x) z+y^{\top} \mathbf{B}(x) y+\mathbf{c}(x)=\boldsymbol{I}(x, y, z)}<br>$$<br>由于之前有约定：<br>$$<br>\begin{array}{l}{\mathbf{a}(s):=\mathbf{A}(\mathbf{q}(s)) \mathbf{q}^{\prime}(s)} \\ {\mathbf{b}(s):=\mathbf{A}(\mathbf{q}(s)) \mathbf{q}^{\prime \prime}(s)+\mathbf{q}^{\prime}(s)^{\top} \mathbf{B}(\mathbf{q}(s)) \mathbf{q}^{\prime}(s)} \\ {\mathbf{c}(s):=\mathbf{f}(\mathbf{q}(s))} \end{array}<br>$$<br>若要得到$\mathbf{a}(s),\mathbf{b}(s),\mathbf{c}(s)$与$\boldsymbol{I}(x, y, z)$之间的关系，可通过以下方式求得：</p>
+<p>1)．<br>$$<br>\boldsymbol{I}(\boldsymbol{q}(s), 0, 0)=\boldsymbol{f}(\boldsymbol{q}(s))=\boldsymbol{c}(s)<br>$$<br>2).<br>$$<br>\boldsymbol{I}(\boldsymbol{q}(s), 0, \boldsymbol{q}^{\prime}(s))=\mathbf{A}(\mathbf{q}(s)) \mathbf{q}^{\prime}(s)+\boldsymbol{f}(\boldsymbol{q}(s))=\mathbf{a}(s)+\mathbf{c}(s)<br>$$<br>可得：<br>$$<br>\mathbf{a}(s)＝\boldsymbol{I}(\boldsymbol{q}(s), 0, \boldsymbol{q}^{\prime}(s))－\mathbf{c}(s)<br>$$<br>3).<br>$$<br>\boldsymbol{I}(\boldsymbol{q}(s), \boldsymbol{q}^{\prime}(s), \boldsymbol{q}^{\prime\prime}(s))=\mathbf{A}(\mathbf{q}(s)) \mathbf{q}^{\prime \prime}(s)+\mathbf{q}^{\prime}(s)^{\top}\mathbf{B}(\mathbf{q}(s)) \mathbf{q}^{\prime}(s) ＋\boldsymbol{f}(\boldsymbol{q}(s))=\mathbf{b}(s)+\mathbf{c}(s)<br>$$<br>可得：<br>$$<br>\mathbf{b}(s)＝\boldsymbol{I}(\boldsymbol{q}(s), \boldsymbol{q}^{\prime}(s), \boldsymbol{q}^{\prime\prime}(s))－\mathbf{c}(s)<br>$$<br>综上：<br>$$<br>\mathbf{a}(s)＝\boldsymbol{I}(\boldsymbol{q}(s), 0, \boldsymbol{q}^{\prime}(s))－\mathbf{c}(s)　\\<br>\mathbf{b}(s)＝\boldsymbol{I}(\boldsymbol{q}(s), \boldsymbol{q}^{\prime}(s), \boldsymbol{q}^{\prime\prime}(s))－\mathbf{c}(s) \\<br>\boldsymbol{c}(s)=\boldsymbol{I}(\boldsymbol{q}(s), 0, 0)<br>$$</p>
+<h4 id="5-路径参数化"><a href="#5-路径参数化" class="headerlink" title="5.路径参数化"></a>5.路径参数化</h4><p>类似基于CO的方法，我们将区间$\left[0, s_{\mathrm{end}}\right]$划分为$N$个片段和$N+1$个网格点：<br>$$<br>0=: s_{0}, s_{1} \dots s_{N-1}, s_{N}:=s_{\mathrm{end}}<br>$$</p>
+<p>区间$\left[0, s_{\mathrm{end}}\right]$ 上的连续路劲加速度用$u_{i}$表示，在$s_{i}$点的速度的平方$\dot{\boldsymbol{s}}<em>{i}^{2}$用$x</em>{i}$表示，并且它们之间存在以下关系：</p>
+<p>$$<br>x_{i+1}=x_{i}+2 \Delta_{i} u_{i}, \quad i=0 \ldots N-1 \label{eq:speciality}<br>$$</p>
+<p>其中：</p>
+<p>$$<br>\Delta_{i}:=s_{i+1}-s_{i}<br>$$</p>
+<p>之所以有这样的推导结果，是由于：</p>
+<p>$$<br>\frac{\mathrm{d} \dot{s}^{2}}{\mathrm{d} s}=2 \dot{s} \frac{\mathrm{d} \dot{s}}{\mathrm{d} s}=2\frac{\mathrm{d} s}{\mathrm{d} t} \frac{\mathrm{d} \dot{s}}{\mathrm{d} s}=2\frac{\mathrm{d} \dot{s}}{\mathrm{d} t}=2 \ddot{s}=2 u<br>$$</p>
+<p>随后，我们称$s_{i}$为$i$ -stage，称$u_{i}$ 和 $x_{i}$分别为$i$ -stage下的控制与状态，任意满足以上的线性关系的序列$x_{0}, u_{0}, \ldots, x_{N-1}, u_{N-1}$均可被称为一个路径参数化。</p>
+<p>只有当一个参数化满在区间$\left[0, s_{\mathrm{end}}\right]$上的每一个点都满足约束条件时，一个参数化才是合理的。将这些要求引入离散集合的一个可行方法是搭配离散的组合，即：对于每一个离散的位置$s_{i}$，都要评估连续性约束，并且需要控制$u_{i}$ 与状态$x_{i}$满足：<br>$$<br>\mathbf{a}_ {i} u_{i}+\mathbf{b}_ {i} x_{i}+\mathbf{c}_ {i} \in \mathscr{C}_{i}<br>$$</p>
+<p>$$<br>\text { 其中 } \mathbf{a}_ {i}:=\mathbf{a}\left(s_{i}\right), \mathbf{b}_ {i}:=\mathbf{b}\left(s_{i}\right), \mathbf{c}_ {i}:=\mathbf{c}\left(s_{i}\right), \mathscr{C}_ {i}:=\mathscr{C}\left(s_{i}\right)<br>$$</p>
 
       
 
@@ -251,11 +298,22 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">robot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/15/toppra安装步骤及相关问题/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/10/15/toppra论文阅读（一）/">展开全文 >></a>
         </p>
       
 
@@ -305,11 +363,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-ipdb安装命令"><a href="#1-ipdb安装命令" class="headerlink" title="1.ipdb安装命令"></a>1.ipdb安装命令</h3><figure class="highlight plain"><figcaption><span>install ipdb```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">但该命令会安装失败，更改命令</span><br><span class="line"></span><br><span class="line">```pip install ipdb -- user</span><br></pre></td></tr></table></figure>
+        <h3 id="1-ipdb安装命令"><a href="#1-ipdb安装命令" class="headerlink" title="1.ipdb安装命令"></a>1.ipdb安装命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install ipdb</span><br></pre></td></tr></table></figure>
+
+<p>但该命令会安装失败，更改命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install ipdb -- user</span><br></pre></td></tr></table></figure>
 
 <p>安装成功</p>
 <h3 id="2-ipdb的具体使用方法"><a href="#2-ipdb的具体使用方法" class="headerlink" title="2.ipdb的具体使用方法"></a>2.ipdb的具体使用方法</h3><p>程序在待调试处插入命令</p>
-<figure class="highlight plain"><figcaption><span>ipdb;ipdb.set_trace()```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">当程序运行到该命令处，会自动暂定，进入调试环境</span><br><span class="line"></span><br><span class="line">常用命令`n`，可执行暂停处的后一条语句</span><br><span class="line"></span><br><span class="line">常用命令`c`，可从暂停处继续执行，若后面再次遇到```ipdb.set_trace()```命令，则再次进入调试环境</span><br><span class="line"></span><br><span class="line">### 3.ipython调试方法</span><br><span class="line"></span><br><span class="line">python自带了ipython调试器，无需安装，具体使用方法为，在待调试处插入</span><br><span class="line"></span><br><span class="line">```import IPython ; IPython.embed()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import ipdb;ipdb.set_trace()</span><br></pre></td></tr></table></figure>
+
+<p>当程序运行到该命令处，会自动暂定，进入调试环境</p>
+<p>常用命令<code>n</code>，可执行暂停处的后一条语句</p>
+<p>常用命令<code>c</code>，可从暂停处继续执行，若后面再次遇到<code>ipdb.set_trace()</code>命令，则再次进入调试环境</p>
+<h3 id="3-ipython调试方法"><a href="#3-ipython调试方法" class="headerlink" title="3.ipython调试方法"></a>3.ipython调试方法</h3><p>python自带了ipython调试器，无需安装，具体使用方法为，在待调试处插入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import IPython ; IPython.embed()</span><br></pre></td></tr></table></figure>
 
 <p>当代码跳转到调试代码处，会自动暂定，此时可输入调试代码。</p>
 
@@ -388,7 +455,10 @@
         <h3 id="1-显示所能调用的方法"><a href="#1-显示所能调用的方法" class="headerlink" title="1.显示所能调用的方法"></a>1.显示所能调用的方法</h3><p>例题中的所有boxes均有可以调用的方法，若需要显示出某个boxes所能调用的所有方法，在ipython或ipdb中输入<code>box.</code>后按TAB按钮，可以显示出所有能调用的方法。</p>
 <h3 id="2-如何指定某个特定的box"><a href="#2-如何指定某个特定的box" class="headerlink" title="2.如何指定某个特定的box"></a>2.如何指定某个特定的box</h3><p>例题中，box是一个osr环境中的实体，生成后被全部存储在列表boxes中，若需要指定某个特定的box,可通过命令<code>boxes[20]</code>来实现，[  ]中为指定box的序号，box能使用的所有方法均适用于<code>boxes[20]</code></p>
 <h3 id="3-调用方法时的注意事项"><a href="#3-调用方法时的注意事项" class="headerlink" title="3.调用方法时的注意事项"></a>3.调用方法时的注意事项</h3><p>在调用方法时，一定要在某方法的末尾加上括号，如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">若不加括号，不会返回正常值，会返回</span><br><span class="line"></span><br><span class="line">```&lt;bound method KinBody.GetTransform of RaveGetEnvironment(1).GetKinBody(&apos;box40&apos;)&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">box.GetTransform()</span><br></pre></td></tr></table></figure>
+
+<p>若不加括号，不会返回正常值，会返回</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;bound method KinBody.GetTransform of RaveGetEnvironment(1).GetKinBody(&apos;box40&apos;)&gt;</span><br></pre></td></tr></table></figure>
 
 <p>在加上括号后则会返回正常值。</p>
 <h3 id="4-获取抓取目标的旋转矩阵方法"><a href="#4-获取抓取目标的旋转矩阵方法" class="headerlink" title="4.获取抓取目标的旋转矩阵方法"></a>4.获取抓取目标的旋转矩阵方法</h3><p>对于每一个抓取目标，都需要获取其旋转矩阵与空间位置参数，空间位置参数很好获得，目标的原始旋转矩阵也能获得，因为每个目标都是一个实体，直接调用方法获得相关参数即可。</p>
@@ -923,11 +993,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color1">other</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">other</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
             
             <div class="clearfix"></div>
