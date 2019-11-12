@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>python技巧 | AIP&#39;s bolg</title>
+  <title>机器人轨迹规划多项式插值 | AIP&#39;s bolg</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.ipdb安装命令1pip install ipdb  但该命令会安装失败，更改命令 1pip install ipdb -- user  安装成功 2.ipdb的具体使用方法程序在待调试处插入命令 1import ipdb;ipdb.set_trace()  当程序运行到该命令处，会自动暂定，进入调试环境 常用命令n，可执行暂停处的后一条语句 常用命令c，可从暂停处继续执行，若后面再次遇到ip">
-<meta name="keywords" content="python">
+  <meta name="description" content="机器人轨迹规划多项式插值1.轨迹规划的定义轨迹规划(trajectory planning)是运动规划(motion planning)研究的主要内容。运动规划指的是运动插补，在起始点和终止点之间插入中间点序列，实现沿着轨迹的平稳运动。运动控制包含路径规划(path planning)和轨迹规划，路径规划是规划位置，在起终点之间经过的路径点，轨迹规划是规划时间，将路径点与时间相对应。对于我们的六轴">
+<meta name="keywords" content="robot">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python技巧">
-<meta property="og:url" content="http://yoursite.com/2019/10/06/python技巧/index.html">
+<meta property="og:title" content="机器人轨迹规划多项式插值">
+<meta property="og:url" content="http://yoursite.com/2019/11/12/机器人轨迹规划多项式插值/index.html">
 <meta property="og:site_name" content="AIP&#39;s bolg">
-<meta property="og:description" content="1.ipdb安装命令1pip install ipdb  但该命令会安装失败，更改命令 1pip install ipdb -- user  安装成功 2.ipdb的具体使用方法程序在待调试处插入命令 1import ipdb;ipdb.set_trace()  当程序运行到该命令处，会自动暂定，进入调试环境 常用命令n，可执行暂停处的后一条语句 常用命令c，可从暂停处继续执行，若后面再次遇到ip">
+<meta property="og:description" content="机器人轨迹规划多项式插值1.轨迹规划的定义轨迹规划(trajectory planning)是运动规划(motion planning)研究的主要内容。运动规划指的是运动插补，在起始点和终止点之间插入中间点序列，实现沿着轨迹的平稳运动。运动控制包含路径规划(path planning)和轨迹规划，路径规划是规划位置，在起终点之间经过的路径点，轨迹规划是规划时间，将路径点与时间相对应。对于我们的六轴">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-15T14:50:44.996Z">
+<meta property="og:updated_time" content="2019-11-12T10:56:00.508Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python技巧">
-<meta name="twitter:description" content="1.ipdb安装命令1pip install ipdb  但该命令会安装失败，更改命令 1pip install ipdb -- user  安装成功 2.ipdb的具体使用方法程序在待调试处插入命令 1import ipdb;ipdb.set_trace()  当程序运行到该命令处，会自动暂定，进入调试环境 常用命令n，可执行暂停处的后一条语句 常用命令c，可从暂停处继续执行，若后面再次遇到ip">
+<meta name="twitter:title" content="机器人轨迹规划多项式插值">
+<meta name="twitter:description" content="机器人轨迹规划多项式插值1.轨迹规划的定义轨迹规划(trajectory planning)是运动规划(motion planning)研究的主要内容。运动规划指的是运动插补，在起始点和终止点之间插入中间点序列，实现沿着轨迹的平稳运动。运动控制包含路径规划(path planning)和轨迹规划，路径规划是规划位置，在起终点之间经过的路径点，轨迹规划是规划时间，将路径点与时间相对应。对于我们的六轴">
   
   
     <link rel="icon" href="/favicon.png">
@@ -171,42 +171,34 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-python技巧" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-机器人轨迹规划多项式插值" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      python技巧
+      机器人轨迹规划多项式插值
     </h1>
   
 
         
-        <a href="/2019/10/06/python技巧/" class="archive-article-date">
-  	<time datetime="2019-10-06T07:49:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-06</time>
+        <a href="/2019/11/12/机器人轨迹规划多项式插值/" class="archive-article-date">
+  	<time datetime="2019-11-12T10:33:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-ipdb安装命令"><a href="#1-ipdb安装命令" class="headerlink" title="1.ipdb安装命令"></a>1.ipdb安装命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install ipdb</span><br></pre></td></tr></table></figure>
-
-<p>但该命令会安装失败，更改命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install ipdb -- user</span><br></pre></td></tr></table></figure>
-
-<p>安装成功</p>
-<h3 id="2-ipdb的具体使用方法"><a href="#2-ipdb的具体使用方法" class="headerlink" title="2.ipdb的具体使用方法"></a>2.ipdb的具体使用方法</h3><p>程序在待调试处插入命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import ipdb;ipdb.set_trace()</span><br></pre></td></tr></table></figure>
-
-<p>当程序运行到该命令处，会自动暂定，进入调试环境</p>
-<p>常用命令<code>n</code>，可执行暂停处的后一条语句</p>
-<p>常用命令<code>c</code>，可从暂停处继续执行，若后面再次遇到<code>ipdb.set_trace()</code>命令，则再次进入调试环境</p>
-<h3 id="3-ipython调试方法"><a href="#3-ipython调试方法" class="headerlink" title="3.ipython调试方法"></a>3.ipython调试方法</h3><p>python自带了ipython调试器，无需安装，具体使用方法为，在待调试处插入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import IPython ; IPython.embed()</span><br></pre></td></tr></table></figure>
-
-<p>当代码跳转到调试代码处，会自动暂定，此时可输入调试代码。</p>
+        <h3 id="机器人轨迹规划多项式插值"><a href="#机器人轨迹规划多项式插值" class="headerlink" title="机器人轨迹规划多项式插值"></a>机器人轨迹规划多项式插值</h3><h4 id="1-轨迹规划的定义"><a href="#1-轨迹规划的定义" class="headerlink" title="1.轨迹规划的定义"></a>1.轨迹规划的定义</h4><p>轨迹规划(trajectory planning)是运动规划(motion planning)研究的主要内容。运动规划指的是运动插补，在起始点和终止点之间插入中间点序列，实现沿着轨迹的平稳运动。运动控制包含路径规划(path planning)和轨迹规划，路径规划是规划位置，在起终点之间经过的路径点，轨迹规划是规划时间，将路径点与时间相对应。<br>对于我们的六轴机器人而言轨迹规划可以分为：关节空间轨迹规划和笛卡尔空间轨迹规划。关节空间轨迹规划是把机器人的关节变量变换成跟时间的函数，然后对角速度和角加速度进行约束。笛卡尔空间轨迹规划是把机器人末端在笛卡尔空间的位移、速度和加速度变换成跟时间的函数关系。<br>五次多项式插值能够解决三次多项式插值的角速度变化不平滑且加速度存在跳变的情况。</p>
+<h4 id="2-数学基础"><a href="#2-数学基础" class="headerlink" title="2. 数学基础"></a>2. 数学基础</h4><p>五次多项式插值，角位移、角速度和角加速度的函数表达式为：</p>
+<script type="math/tex; mode=display">
+\left\{\begin{array}{l}{\theta(t)=a_{0}+a_{1} t+a_{2} t^{2}+a_{3} t^{3}+a_{4} t^{4}+a_{5} t^{5}} \\ {\dot{\theta}(t)=a_{1}+2 a_{2} t+3 a_ {3} t^{2}+4 a_{4} t^{3}+5 a_{5} t^{4}} \\ {\ddot{\theta}(t)=2 a_{2}+6 a_ {3} t+12 a_{4} t^{2}+20 a_{5} t^{3}}\end{array}\right.</script><p>约束条件如下，相对三次多项式插值，增加了对起止点角速度的约束（为简便计算设$t_0$为$0$）</p>
+<script type="math/tex; mode=display">
+\left\{\begin{array}{l}{\theta\left(t_{0}\right)=\theta_{0}=a_{0}} \\ {\theta\left(t_{f}\right)=\theta_{f}=a_{0}+a_{1} t_{f}+a_{2} t_{f}^{2}+a_{3} t_{f}^{3}+a_{4} t_{f}^{4}+a_{5} t_{f}^{5}} \\ {\dot{\theta}\left(t_{0}\right)=\dot{\theta}_{0}=a_{1}} \\ {\dot{\theta}\left(t_{f}\right)=\dot{\theta}_{f}=a_{1}+2 a_{2} t_{f}+3 a_{3} t_{f}^{2}+4 a_{4} t_{f}^{3}+5 a_{5} t_{f}^{4}} \\ {\ddot{\theta}\left(t_{0}\right)=\ddot{\theta}_{0}=2 a_{2}} \\ {\ddot{\theta}\left(t_{f}\right)=\ddot{\theta}_{f}=2 a_{2}+6 a_{3} t_{f}+12 a_{4} t_{f}^{2}+20 a_{5} t_{f}^{3}}\end{array}\right.</script><p>求解得</p>
+<script type="math/tex; mode=display">
+\left\{\begin{array}{l}{a_{0}=\theta_{0}} \\ {a_{1}=\dot{\theta}_{0}} \\ {a_{2}=\frac{\bar{\theta}_{0}}{2}} \\ {a_{3}=\frac{20 \theta_{f}-20 \theta_{0}-\left(8 \dot{\theta}_{f}+12 \dot{\theta}_{0}\right) t_{f}-\left(3 \vec{\theta}_{0}-\ddot{\theta}_{f}\right) t_{f}^{2}}{2 t_{f}^{3}}} \\ {a_{4}=\frac{30 \theta_{0}-30 \theta_{f}+\left(14 \dot{\theta}_{f}+16 \dot{\theta}_{0}\right) t_{f}+\left(3 \ddot{\theta}_{0}-2 \ddot{\theta}_{f}\right) t_{f}^{2}}{2 t_{f}^{4}}} \\ {a_{5}=\frac{12 \theta_{f}-12 \theta_{0}-\left(6 \dot{\theta}_{f}+6 \dot{\theta}_{0}\right) t_{f}-\left(\vec{\theta}_{0}-\ddot{\theta}_{f}\right) t_{f}^{2}}{2 t_{f}^{5}}}\end{array}\right.</script><p>相对于三次多项式插值，加速度也是平滑的曲线，并没有出现跳变的情况。然而在机器人系统中，单纯的多项式规划有一个非常严重的问题：没有匀速段，无法根据期望速度提供匀速控制，而在大部分机器人应用中，对加工的速度控制都是有要求的。另一个问题就是，次数越高的多项式，加速过程越慢，整个运动过程中的平均速度越小，影响效率。</p>
 
       
 
@@ -220,7 +212,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">robot</a>
         		</li>
       		
 		</ul>
@@ -276,7 +268,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/06/python技巧/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/12/机器人轨迹规划多项式插值/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -290,18 +282,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/10/15/toppra安装步骤及相关问题/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          toppra安装步骤及相关问题
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/10/06/osr例题技巧/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">osr例题技巧</div>
+    <a href="/2019/11/12/intorpolotar插值程序改写及注释/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">intorpolotar插值程序改写及注释</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -328,7 +311,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-ipdb安装命令"><span class="toc-number">1.</span> <span class="toc-text">1.ipdb安装命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-ipdb的具体使用方法"><span class="toc-number">2.</span> <span class="toc-text">2.ipdb的具体使用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-ipython调试方法"><span class="toc-number">3.</span> <span class="toc-text">3.ipython调试方法</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#机器人轨迹规划多项式插值"><span class="toc-number">1.</span> <span class="toc-text">机器人轨迹规划多项式插值</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-轨迹规划的定义"><span class="toc-number">1.1.</span> <span class="toc-text">1.轨迹规划的定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-数学基础"><span class="toc-number">1.2.</span> <span class="toc-text">2. 数学基础</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>

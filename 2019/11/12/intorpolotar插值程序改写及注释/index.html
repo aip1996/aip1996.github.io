@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>python技巧 | AIP&#39;s bolg</title>
+  <title>intorpolotar插值程序改写及注释 | AIP&#39;s bolg</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.ipdb安装命令1pip install ipdb  但该命令会安装失败，更改命令 1pip install ipdb -- user  安装成功 2.ipdb的具体使用方法程序在待调试处插入命令 1import ipdb;ipdb.set_trace()  当程序运行到该命令处，会自动暂定，进入调试环境 常用命令n，可执行暂停处的后一条语句 常用命令c，可从暂停处继续执行，若后面再次遇到ip">
-<meta name="keywords" content="python">
+  <meta name="description" content="intorpolotar插值程序改写及注释1.改写PiecewisePolynomialPath是一个用以实线样条插值的类，其中调用了scipy的类scipy.interpolate.PPoly来实现，改写前的报错为： 1234567sys:1: DeprecationWarning: `BdbQuit_excepthook` is deprecated since version 5.1Trac">
+<meta name="keywords" content="robot">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python技巧">
-<meta property="og:url" content="http://yoursite.com/2019/10/06/python技巧/index.html">
+<meta property="og:title" content="intorpolotar插值程序改写及注释">
+<meta property="og:url" content="http://yoursite.com/2019/11/12/intorpolotar插值程序改写及注释/index.html">
 <meta property="og:site_name" content="AIP&#39;s bolg">
-<meta property="og:description" content="1.ipdb安装命令1pip install ipdb  但该命令会安装失败，更改命令 1pip install ipdb -- user  安装成功 2.ipdb的具体使用方法程序在待调试处插入命令 1import ipdb;ipdb.set_trace()  当程序运行到该命令处，会自动暂定，进入调试环境 常用命令n，可执行暂停处的后一条语句 常用命令c，可从暂停处继续执行，若后面再次遇到ip">
+<meta property="og:description" content="intorpolotar插值程序改写及注释1.改写PiecewisePolynomialPath是一个用以实线样条插值的类，其中调用了scipy的类scipy.interpolate.PPoly来实现，改写前的报错为： 1234567sys:1: DeprecationWarning: `BdbQuit_excepthook` is deprecated since version 5.1Trac">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-15T14:50:44.996Z">
+<meta property="og:updated_time" content="2019-11-12T10:47:21.036Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python技巧">
-<meta name="twitter:description" content="1.ipdb安装命令1pip install ipdb  但该命令会安装失败，更改命令 1pip install ipdb -- user  安装成功 2.ipdb的具体使用方法程序在待调试处插入命令 1import ipdb;ipdb.set_trace()  当程序运行到该命令处，会自动暂定，进入调试环境 常用命令n，可执行暂停处的后一条语句 常用命令c，可从暂停处继续执行，若后面再次遇到ip">
+<meta name="twitter:title" content="intorpolotar插值程序改写及注释">
+<meta name="twitter:description" content="intorpolotar插值程序改写及注释1.改写PiecewisePolynomialPath是一个用以实线样条插值的类，其中调用了scipy的类scipy.interpolate.PPoly来实现，改写前的报错为： 1234567sys:1: DeprecationWarning: `BdbQuit_excepthook` is deprecated since version 5.1Trac">
   
   
     <link rel="icon" href="/favicon.png">
@@ -171,42 +171,45 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-python技巧" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-intorpolotar插值程序改写及注释" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      python技巧
+      intorpolotar插值程序改写及注释
     </h1>
   
 
         
-        <a href="/2019/10/06/python技巧/" class="archive-article-date">
-  	<time datetime="2019-10-06T07:49:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-06</time>
+        <a href="/2019/11/12/intorpolotar插值程序改写及注释/" class="archive-article-date">
+  	<time datetime="2019-11-12T10:33:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-ipdb安装命令"><a href="#1-ipdb安装命令" class="headerlink" title="1.ipdb安装命令"></a>1.ipdb安装命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install ipdb</span><br></pre></td></tr></table></figure>
+        <h3 id="intorpolotar插值程序改写及注释"><a href="#intorpolotar插值程序改写及注释" class="headerlink" title="intorpolotar插值程序改写及注释"></a>intorpolotar插值程序改写及注释</h3><h4 id="1-改写"><a href="#1-改写" class="headerlink" title="1.改写"></a>1.改写</h4><p>PiecewisePolynomialPath是一个用以实线样条插值的类，其中调用了scipy的类scipy.interpolate.PPoly来实现，改写前的报错为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sys:1: DeprecationWarning: `BdbQuit_excepthook` is deprecated since version 5.1</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;test_window.py&quot;, line 168, in &lt;module&gt;</span><br><span class="line">    main()</span><br><span class="line">  File &quot;test_window.py&quot;, line 149, in main</span><br><span class="line">    path_instance = toppra.PiecewisePolynomialPath(coefficient_descend)</span><br><span class="line">AttributeError: &apos;module&apos; object has no attribute &apos;PiecewisePolynomialPath&apos;</span><br></pre></td></tr></table></figure>
 
-<p>但该命令会安装失败，更改命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install ipdb -- user</span><br></pre></td></tr></table></figure>
+<p>可推测为PiecewisePolynomialPath模组缺失，直接添加在interpolator程序中插入PiecewisePolynomialPath类后，报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">File &quot;/home/aip/.local/lib/python2.7/site-packages/toppra-0.2.2-py2.7-linux-x86_64.egg/toppra/interpolator.py&quot;, line 597, in __init__</span><br><span class="line">    self.dof = self.shape[2]</span><br><span class="line">AttributeError: can&apos;t set attribute</span><br></pre></td></tr></table></figure>
 
-<p>安装成功</p>
-<h3 id="2-ipdb的具体使用方法"><a href="#2-ipdb的具体使用方法" class="headerlink" title="2.ipdb的具体使用方法"></a>2.ipdb的具体使用方法</h3><p>程序在待调试处插入命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import ipdb;ipdb.set_trace()</span><br></pre></td></tr></table></figure>
+<p>可以推测为self.dof的属性无法设置，由于PiecewisePolynomialPath类的父类为Interpolator，在Interpolator类中找到self.dof的定义为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@property</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dof</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="string">"""Return the degrees-of-freedom of the path."""</span></span><br><span class="line">    <span class="keyword">raise</span> NotImplementedError</span><br></pre></td></tr></table></figure>
 
-<p>当程序运行到该命令处，会自动暂定，进入调试环境</p>
-<p>常用命令<code>n</code>，可执行暂停处的后一条语句</p>
-<p>常用命令<code>c</code>，可从暂停处继续执行，若后面再次遇到<code>ipdb.set_trace()</code>命令，则再次进入调试环境</p>
-<h3 id="3-ipython调试方法"><a href="#3-ipython调试方法" class="headerlink" title="3.ipython调试方法"></a>3.ipython调试方法</h3><p>python自带了ipython调试器，无需安装，具体使用方法为，在待调试处插入</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import IPython ; IPython.embed()</span><br></pre></td></tr></table></figure>
+<p>可见该处加上了@property的只读属性，因此注释掉@property，运行程序，报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">File&quot;/home/aip/.local/lib/python2.7/sitepackages/toppra-0.2.2-py2.7-linux-x86_64.egg/toppra/interpolator.py&quot;, line 73, in get_dof</span><br><span class="line">    raise NotImplementedError</span><br><span class="line">NotImplementedError</span><br></pre></td></tr></table></figure>
 
-<p>当代码跳转到调试代码处，会自动暂定，此时可输入调试代码。</p>
+<p>可见interpolator程序73行get_dof方法抛出异常，查看其代码为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def get_dof(self):</span><br><span class="line">        # type: () -&gt; int</span><br><span class="line">        &quot;&quot;&quot;Return the degree-of-freedom of the path.</span><br><span class="line"></span><br><span class="line">        Returns</span><br><span class="line">        -------</span><br><span class="line">        out:</span><br><span class="line">            Degree-of-freedom of the path.</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        raise NotImplementedError</span><br></pre></td></tr></table></figure>
+
+<p>该处为定义get_dof方法，只进行了一个方法名称的声明，因此加上return self.dof具体命令，并注释掉raise NotImplementedError后，运行程序，成功运行起rrt实例程序。</p>
+<h4 id="2-注释"><a href="#2-注释" class="headerlink" title="2.注释"></a>2.注释</h4><p>注释后代码实例如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PiecewisePolynomialPath</span><span class="params">(Interpolator)</span>:</span></span><br><span class="line">    <span class="string">""" A class that can generate piecewise polynomial paths, including position, speed and acceleration, calling the class scipy.interpolate.PPoly</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Parameters</span></span><br><span class="line"><span class="string">    ----------</span></span><br><span class="line"><span class="string">    poly_coeff_set : ndarray, shape (degree_poly, amount_segment, amount_dof)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        degree_poly : the coefficients of the polynomials, containing the starting and ending angles of robot joints in each line segment</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        amount_segment: the number of connections between adjacent nodes in the final path generated in RRT algorithm</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        amount_dof: DOF of robot</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    s_waypoints: ndarray</span></span><br><span class="line"><span class="string">        Number of the waypoints.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, poly_coeff_set)</span>:</span></span><br><span class="line">        self.poly_coeff_set = np.array(poly_coeff_set)</span><br><span class="line">        self.shape = np.array(self.poly_coeff_set.shape)</span><br><span class="line">        self.amount_segment = self.shape[<span class="number">1</span>]</span><br><span class="line">        self.dof = self.shape[<span class="number">2</span>]</span><br><span class="line">        self.degree_poly = self.shape[<span class="number">0</span>]</span><br><span class="line">        self.s_start = <span class="number">0</span></span><br><span class="line">        self.s_end = self.amount_segment</span><br><span class="line">        self.duration = self.amount_segment</span><br><span class="line">        self.s_waypoint = np.arange(<span class="number">0</span>, self.duration+<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        self.picecwise_poly = PPoly(self.poly_coeff_set, self.s_waypoint)</span><br><span class="line">        self.picecwise_poly_s = self.picecwise_poly.derivative()</span><br><span class="line">        self.picecwise_poly_ss = self.picecwise_poly_s.derivative()</span><br><span class="line">        <span class="keyword">import</span> ipdb; ipdb.set_trace()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_duration</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.duration</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">eval</span><span class="params">(self, s_sample)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.picecwise_poly(s_sample)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">evald</span><span class="params">(self, s_sample)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.picecwise_poly_s(s_sample)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">evaldd</span><span class="params">(self, s_sample)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.picecwise_poly_ss(s_sample)</span><br></pre></td></tr></table></figure>
+
 
       
 
@@ -220,7 +223,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">robot</a>
         		</li>
       		
 		</ul>
@@ -276,7 +279,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/06/python技巧/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/12/intorpolotar插值程序改写及注释/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -290,18 +293,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/10/15/toppra安装步骤及相关问题/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/11/12/机器人轨迹规划多项式插值/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          toppra安装步骤及相关问题
+          机器人轨迹规划多项式插值
         
       </div>
     </a>
   
   
-    <a href="/2019/10/06/osr例题技巧/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">osr例题技巧</div>
+    <a href="/2019/10/22/toppra论文阅读（二）/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">toppra论文阅读（二）</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -328,7 +331,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-ipdb安装命令"><span class="toc-number">1.</span> <span class="toc-text">1.ipdb安装命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-ipdb的具体使用方法"><span class="toc-number">2.</span> <span class="toc-text">2.ipdb的具体使用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-ipython调试方法"><span class="toc-number">3.</span> <span class="toc-text">3.ipython调试方法</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#intorpolotar插值程序改写及注释"><span class="toc-number">1.</span> <span class="toc-text">intorpolotar插值程序改写及注释</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-改写"><span class="toc-number">1.1.</span> <span class="toc-text">1.改写</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-注释"><span class="toc-number">1.2.</span> <span class="toc-text">2.注释</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>

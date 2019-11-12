@@ -168,6 +168,179 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-机器人轨迹规划多项式插值" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/12/机器人轨迹规划多项式插值/">机器人轨迹规划多项式插值</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/12/机器人轨迹规划多项式插值/" class="archive-article-date">
+  	<time datetime="2019-11-12T10:33:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="机器人轨迹规划多项式插值"><a href="#机器人轨迹规划多项式插值" class="headerlink" title="机器人轨迹规划多项式插值"></a>机器人轨迹规划多项式插值</h3><h4 id="1-轨迹规划的定义"><a href="#1-轨迹规划的定义" class="headerlink" title="1.轨迹规划的定义"></a>1.轨迹规划的定义</h4><p>轨迹规划(trajectory planning)是运动规划(motion planning)研究的主要内容。运动规划指的是运动插补，在起始点和终止点之间插入中间点序列，实现沿着轨迹的平稳运动。运动控制包含路径规划(path planning)和轨迹规划，路径规划是规划位置，在起终点之间经过的路径点，轨迹规划是规划时间，将路径点与时间相对应。<br>对于我们的六轴机器人而言轨迹规划可以分为：关节空间轨迹规划和笛卡尔空间轨迹规划。关节空间轨迹规划是把机器人的关节变量变换成跟时间的函数，然后对角速度和角加速度进行约束。笛卡尔空间轨迹规划是把机器人末端在笛卡尔空间的位移、速度和加速度变换成跟时间的函数关系。<br>五次多项式插值能够解决三次多项式插值的角速度变化不平滑且加速度存在跳变的情况。</p>
+<h4 id="2-数学基础"><a href="#2-数学基础" class="headerlink" title="2. 数学基础"></a>2. 数学基础</h4><p>五次多项式插值，角位移、角速度和角加速度的函数表达式为：</p>
+<script type="math/tex; mode=display">
+\left\{\begin{array}{l}{\theta(t)=a_{0}+a_{1} t+a_{2} t^{2}+a_{3} t^{3}+a_{4} t^{4}+a_{5} t^{5}} \\ {\dot{\theta}(t)=a_{1}+2 a_{2} t+3 a_ {3} t^{2}+4 a_{4} t^{3}+5 a_{5} t^{4}} \\ {\ddot{\theta}(t)=2 a_{2}+6 a_ {3} t+12 a_{4} t^{2}+20 a_{5} t^{3}}\end{array}\right.</script><p>约束条件如下，相对三次多项式插值，增加了对起止点角速度的约束（为简便计算设$t_0$为$0$）</p>
+<script type="math/tex; mode=display">
+\left\{\begin{array}{l}{\theta\left(t_{0}\right)=\theta_{0}=a_{0}} \\ {\theta\left(t_{f}\right)=\theta_{f}=a_{0}+a_{1} t_{f}+a_{2} t_{f}^{2}+a_{3} t_{f}^{3}+a_{4} t_{f}^{4}+a_{5} t_{f}^{5}} \\ {\dot{\theta}\left(t_{0}\right)=\dot{\theta}_{0}=a_{1}} \\ {\dot{\theta}\left(t_{f}\right)=\dot{\theta}_{f}=a_{1}+2 a_{2} t_{f}+3 a_{3} t_{f}^{2}+4 a_{4} t_{f}^{3}+5 a_{5} t_{f}^{4}} \\ {\ddot{\theta}\left(t_{0}\right)=\ddot{\theta}_{0}=2 a_{2}} \\ {\ddot{\theta}\left(t_{f}\right)=\ddot{\theta}_{f}=2 a_{2}+6 a_{3} t_{f}+12 a_{4} t_{f}^{2}+20 a_{5} t_{f}^{3}}\end{array}\right.</script><p>求解得</p>
+<script type="math/tex; mode=display">
+\left\{\begin{array}{l}{a_{0}=\theta_{0}} \\ {a_{1}=\dot{\theta}_{0}} \\ {a_{2}=\frac{\bar{\theta}_{0}}{2}} \\ {a_{3}=\frac{20 \theta_{f}-20 \theta_{0}-\left(8 \dot{\theta}_{f}+12 \dot{\theta}_{0}\right) t_{f}-\left(3 \vec{\theta}_{0}-\ddot{\theta}_{f}\right) t_{f}^{2}}{2 t_{f}^{3}}} \\ {a_{4}=\frac{30 \theta_{0}-30 \theta_{f}+\left(14 \dot{\theta}_{f}+16 \dot{\theta}_{0}\right) t_{f}+\left(3 \ddot{\theta}_{0}-2 \ddot{\theta}_{f}\right) t_{f}^{2}}{2 t_{f}^{4}}} \\ {a_{5}=\frac{12 \theta_{f}-12 \theta_{0}-\left(6 \dot{\theta}_{f}+6 \dot{\theta}_{0}\right) t_{f}-\left(\vec{\theta}_{0}-\ddot{\theta}_{f}\right) t_{f}^{2}}{2 t_{f}^{5}}}\end{array}\right.</script><p>相对于三次多项式插值，加速度也是平滑的曲线，并没有出现跳变的情况。然而在机器人系统中，单纯的多项式规划有一个非常严重的问题：没有匀速段，无法根据期望速度提供匀速控制，而在大部分机器人应用中，对加工的速度控制都是有要求的。另一个问题就是，次数越高的多项式，加速过程越慢，整个运动过程中的平均速度越小，影响效率。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">robot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/12/机器人轨迹规划多项式插值/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-intorpolotar插值程序改写及注释" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/12/intorpolotar插值程序改写及注释/">intorpolotar插值程序改写及注释</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/12/intorpolotar插值程序改写及注释/" class="archive-article-date">
+  	<time datetime="2019-11-12T10:33:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="intorpolotar插值程序改写及注释"><a href="#intorpolotar插值程序改写及注释" class="headerlink" title="intorpolotar插值程序改写及注释"></a>intorpolotar插值程序改写及注释</h3><h4 id="1-改写"><a href="#1-改写" class="headerlink" title="1.改写"></a>1.改写</h4><p>PiecewisePolynomialPath是一个用以实线样条插值的类，其中调用了scipy的类scipy.interpolate.PPoly来实现，改写前的报错为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sys:1: DeprecationWarning: `BdbQuit_excepthook` is deprecated since version 5.1</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;test_window.py&quot;, line 168, in &lt;module&gt;</span><br><span class="line">    main()</span><br><span class="line">  File &quot;test_window.py&quot;, line 149, in main</span><br><span class="line">    path_instance = toppra.PiecewisePolynomialPath(coefficient_descend)</span><br><span class="line">AttributeError: &apos;module&apos; object has no attribute &apos;PiecewisePolynomialPath&apos;</span><br></pre></td></tr></table></figure>
+
+<p>可推测为PiecewisePolynomialPath模组缺失，直接添加在interpolator程序中插入PiecewisePolynomialPath类后，报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">File &quot;/home/aip/.local/lib/python2.7/site-packages/toppra-0.2.2-py2.7-linux-x86_64.egg/toppra/interpolator.py&quot;, line 597, in __init__</span><br><span class="line">    self.dof = self.shape[2]</span><br><span class="line">AttributeError: can&apos;t set attribute</span><br></pre></td></tr></table></figure>
+
+<p>可以推测为self.dof的属性无法设置，由于PiecewisePolynomialPath类的父类为Interpolator，在Interpolator类中找到self.dof的定义为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@property</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dof</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="string">"""Return the degrees-of-freedom of the path."""</span></span><br><span class="line">    <span class="keyword">raise</span> NotImplementedError</span><br></pre></td></tr></table></figure>
+
+<p>可见该处加上了@property的只读属性，因此注释掉@property，运行程序，报错：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">File&quot;/home/aip/.local/lib/python2.7/sitepackages/toppra-0.2.2-py2.7-linux-x86_64.egg/toppra/interpolator.py&quot;, line 73, in get_dof</span><br><span class="line">    raise NotImplementedError</span><br><span class="line">NotImplementedError</span><br></pre></td></tr></table></figure>
+
+<p>可见interpolator程序73行get_dof方法抛出异常，查看其代码为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def get_dof(self):</span><br><span class="line">        # type: () -&gt; int</span><br><span class="line">        &quot;&quot;&quot;Return the degree-of-freedom of the path.</span><br><span class="line"></span><br><span class="line">        Returns</span><br><span class="line">        -------</span><br><span class="line">        out:</span><br><span class="line">            Degree-of-freedom of the path.</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        raise NotImplementedError</span><br></pre></td></tr></table></figure>
+
+<p>该处为定义get_dof方法，只进行了一个方法名称的声明，因此加上return self.dof具体命令，并注释掉raise NotImplementedError后，运行程序，成功运行起rrt实例程序。</p>
+<h4 id="2-注释"><a href="#2-注释" class="headerlink" title="2.注释"></a>2.注释</h4><p>注释后代码实例如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PiecewisePolynomialPath</span><span class="params">(Interpolator)</span>:</span></span><br><span class="line">    <span class="string">""" A class that can generate piecewise polynomial paths, including position, speed and acceleration, calling the class scipy.interpolate.PPoly</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Parameters</span></span><br><span class="line"><span class="string">    ----------</span></span><br><span class="line"><span class="string">    poly_coeff_set : ndarray, shape (degree_poly, amount_segment, amount_dof)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        degree_poly : the coefficients of the polynomials, containing the starting and ending angles of robot joints in each line segment</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        amount_segment: the number of connections between adjacent nodes in the final path generated in RRT algorithm</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        amount_dof: DOF of robot</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    s_waypoints: ndarray</span></span><br><span class="line"><span class="string">        Number of the waypoints.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, poly_coeff_set)</span>:</span></span><br><span class="line">        self.poly_coeff_set = np.array(poly_coeff_set)</span><br><span class="line">        self.shape = np.array(self.poly_coeff_set.shape)</span><br><span class="line">        self.amount_segment = self.shape[<span class="number">1</span>]</span><br><span class="line">        self.dof = self.shape[<span class="number">2</span>]</span><br><span class="line">        self.degree_poly = self.shape[<span class="number">0</span>]</span><br><span class="line">        self.s_start = <span class="number">0</span></span><br><span class="line">        self.s_end = self.amount_segment</span><br><span class="line">        self.duration = self.amount_segment</span><br><span class="line">        self.s_waypoint = np.arange(<span class="number">0</span>, self.duration+<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        self.picecwise_poly = PPoly(self.poly_coeff_set, self.s_waypoint)</span><br><span class="line">        self.picecwise_poly_s = self.picecwise_poly.derivative()</span><br><span class="line">        self.picecwise_poly_ss = self.picecwise_poly_s.derivative()</span><br><span class="line">        <span class="keyword">import</span> ipdb; ipdb.set_trace()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_duration</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.duration</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">eval</span><span class="params">(self, s_sample)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.picecwise_poly(s_sample)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">evald</span><span class="params">(self, s_sample)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.picecwise_poly_s(s_sample)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">evaldd</span><span class="params">(self, s_sample)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.picecwise_poly_ss(s_sample)</span><br></pre></td></tr></table></figure>
+
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">robot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/12/intorpolotar插值程序改写及注释/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-toppra论文阅读（二）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -221,89 +394,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/10/22/toppra论文阅读（二）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-toppra安装步骤及相关问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/15/toppra安装步骤及相关问题/">toppra安装步骤及相关问题</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/15/toppra安装步骤及相关问题/" class="archive-article-date">
-  	<time datetime="2019-10-15T14:30:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="toppra安装步骤及相关问题"><a href="#toppra安装步骤及相关问题" class="headerlink" title="toppra安装步骤及相关问题"></a>toppra安装步骤及相关问题</h3><h4 id="1-toppra安装"><a href="#1-toppra安装" class="headerlink" title="1.toppra安装"></a>1.toppra安装</h4><p>终端运行命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/安装目录/ &amp;&amp; cd ~/安装目录/ &amp;&amp; git clone git@github.com:hungpham2511/qpOASES</span><br><span class="line">cd qpOASES/ &amp;&amp; mkdir bin &amp;&amp; make</span><br><span class="line">cd interfaces/python/ &amp;&amp; pip install cython --user</span><br><span class="line">python setup.py install --user</span><br><span class="line">cd ~/安装目录/ &amp;&amp; git clone git@github.com:hungpham2511/toppra &amp;&amp; cd toppra/</span><br><span class="line">pip install -r requirements.txt --user</span><br><span class="line">python setup.py install --user</span><br><span class="line">cd &apos;~/安装目录/toppra/examples&apos; &amp;&amp; python cartesian_accel.py</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-相关问题"><a href="#2-相关问题" class="headerlink" title="2.相关问题"></a>2.相关问题</h4><h5 id="1-安装依赖时出错-（pip-install-r-requirements-txt-–user）"><a href="#1-安装依赖时出错-（pip-install-r-requirements-txt-–user）" class="headerlink" title="(1)安装依赖时出错 （pip install -r requirements.txt –user）"></a>(1)安装依赖时出错 （pip install -r requirements.txt –user）</h5><p>可能的解决办法：</p>
-<p>一、使用命令sudo pip install -r requirements.txt –user</p>
-<p>二、使用命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py</span><br><span class="line">python2.7 get-pip.py --force-reinstall</span><br></pre></td></tr></table></figure>
-
-<p>重新安装pip</p>
-<h5 id="2-依赖安装完毕后，调试代码时，显示ImportError-cannot-import-name-CubicSpline"><a href="#2-依赖安装完毕后，调试代码时，显示ImportError-cannot-import-name-CubicSpline" class="headerlink" title="2)依赖安装完毕后，调试代码时，显示ImportError: cannot import name CubicSpline"></a>2)依赖安装完毕后，调试代码时，显示<code>ImportError: cannot import name CubicSpline</code></h5><p>这是由于虽然安装了最新依赖，但实际调用的任为老版本的scipy造成的，需要在路径<code>home/aip/.local/lib/pytho2.7/site-packages</code>下删除所有scipy相关文件后，再使用命令<code>pip install -r requirements.txt --user</code>安装。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">robot</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/15/toppra安装步骤及相关问题/">展开全文 >></a>
         </p>
       
 
@@ -396,6 +486,89 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/10/15/toppra论文阅读（一）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-toppra安装步骤及相关问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/15/toppra安装步骤及相关问题/">toppra安装步骤及相关问题</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/15/toppra安装步骤及相关问题/" class="archive-article-date">
+  	<time datetime="2019-10-15T14:30:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="toppra安装步骤及相关问题"><a href="#toppra安装步骤及相关问题" class="headerlink" title="toppra安装步骤及相关问题"></a>toppra安装步骤及相关问题</h3><h4 id="1-toppra安装"><a href="#1-toppra安装" class="headerlink" title="1.toppra安装"></a>1.toppra安装</h4><p>终端运行命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p ~/安装目录/ &amp;&amp; cd ~/安装目录/ &amp;&amp; git clone git@github.com:hungpham2511/qpOASES</span><br><span class="line">cd qpOASES/ &amp;&amp; mkdir bin &amp;&amp; make</span><br><span class="line">cd interfaces/python/ &amp;&amp; pip install cython --user</span><br><span class="line">python setup.py install --user</span><br><span class="line">cd ~/安装目录/ &amp;&amp; git clone git@github.com:hungpham2511/toppra &amp;&amp; cd toppra/</span><br><span class="line">pip install -r requirements.txt --user</span><br><span class="line">python setup.py install --user</span><br><span class="line">cd &apos;~/安装目录/toppra/examples&apos; &amp;&amp; python cartesian_accel.py</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-相关问题"><a href="#2-相关问题" class="headerlink" title="2.相关问题"></a>2.相关问题</h4><h5 id="1-安装依赖时出错-（pip-install-r-requirements-txt-–user）"><a href="#1-安装依赖时出错-（pip-install-r-requirements-txt-–user）" class="headerlink" title="(1)安装依赖时出错 （pip install -r requirements.txt –user）"></a>(1)安装依赖时出错 （pip install -r requirements.txt –user）</h5><p>可能的解决办法：</p>
+<p>一、使用命令sudo pip install -r requirements.txt –user</p>
+<p>二、使用命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py</span><br><span class="line">python2.7 get-pip.py --force-reinstall</span><br></pre></td></tr></table></figure>
+
+<p>重新安装pip</p>
+<h5 id="2-依赖安装完毕后，调试代码时，显示ImportError-cannot-import-name-CubicSpline"><a href="#2-依赖安装完毕后，调试代码时，显示ImportError-cannot-import-name-CubicSpline" class="headerlink" title="2)依赖安装完毕后，调试代码时，显示ImportError: cannot import name CubicSpline"></a>2)依赖安装完毕后，调试代码时，显示<code>ImportError: cannot import name CubicSpline</code></h5><p>这是由于虽然安装了最新依赖，但实际调用的任为老版本的scipy造成的，需要在路径<code>home/aip/.local/lib/pytho2.7/site-packages</code>下删除所有scipy相关文件后，再使用命令<code>pip install -r requirements.txt --user</code>安装。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">robot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/15/toppra安装步骤及相关问题/">展开全文 >></a>
         </p>
       
 
@@ -871,92 +1044,10 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/13/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/13/hello-world/" class="archive-article-date">
-  	<time datetime="2019-08-13T15:28:42.377Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">other</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/13/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
@@ -1075,11 +1166,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">python</a>
+                <a href="javascript:void(0)" class="js-tag color1">robot</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">robot</a>
+                <a href="javascript:void(0)" class="js-tag color2">python</a>
               </li>
             
             <div class="clearfix"></div>
