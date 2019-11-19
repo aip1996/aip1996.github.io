@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>toppra论文阅读（二） | AIP&#39;s bolg</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="toppra论文阅读（二）1.关于toppra各种集合之间的关系1). 可允许的状态与控制约束首先定义$i$阶段的可允许的控制状态为：$$\Omega_{i}:=({(u, x) | \mathbf{a}_ {i} u+\mathbf{b}_ {i} x+\mathbf{c}_ {i} \in \mathscr{C}_ {i}})$$我们将$\Omega_{i}$认定为$\mathscr{C}_">
+  <meta name="description" content="toppra论文阅读（二）1.关于toppra各种集合之间的关系1). 可允许的状态与控制约束首先定义$i$阶段的可允许的控制状态为：  \Omega_{i}:=({(u, x) | \mathbf{a}_ {i} u+\mathbf{b}_ {i} x+\mathbf{c}_ {i} \in \mathscr{C}_ {i}})我们将$\Omega{i}$认定为$\mathscr{C} {i}$">
 <meta name="keywords" content="robot">
 <meta property="og:type" content="article">
 <meta property="og:title" content="toppra论文阅读（二）">
 <meta property="og:url" content="http://yoursite.com/2019/10/22/toppra论文阅读（二）/index.html">
 <meta property="og:site_name" content="AIP&#39;s bolg">
-<meta property="og:description" content="toppra论文阅读（二）1.关于toppra各种集合之间的关系1). 可允许的状态与控制约束首先定义$i$阶段的可允许的控制状态为：$$\Omega_{i}:=({(u, x) | \mathbf{a}_ {i} u+\mathbf{b}_ {i} x+\mathbf{c}_ {i} \in \mathscr{C}_ {i}})$$我们将$\Omega_{i}$认定为$\mathscr{C}_">
+<meta property="og:description" content="toppra论文阅读（二）1.关于toppra各种集合之间的关系1). 可允许的状态与控制约束首先定义$i$阶段的可允许的控制状态为：  \Omega_{i}:=({(u, x) | \mathbf{a}_ {i} u+\mathbf{b}_ {i} x+\mathbf{c}_ {i} \in \mathscr{C}_ {i}})我们将$\Omega{i}$认定为$\mathscr{C} {i}$">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-10-22T15:43:54.214Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="toppra论文阅读（二）">
-<meta name="twitter:description" content="toppra论文阅读（二）1.关于toppra各种集合之间的关系1). 可允许的状态与控制约束首先定义$i$阶段的可允许的控制状态为：$$\Omega_{i}:=({(u, x) | \mathbf{a}_ {i} u+\mathbf{b}_ {i} x+\mathbf{c}_ {i} \in \mathscr{C}_ {i}})$$我们将$\Omega_{i}$认定为$\mathscr{C}_">
+<meta name="twitter:description" content="toppra论文阅读（二）1.关于toppra各种集合之间的关系1). 可允许的状态与控制约束首先定义$i$阶段的可允许的控制状态为：  \Omega_{i}:=({(u, x) | \mathbf{a}_ {i} u+\mathbf{b}_ {i} x+\mathbf{c}_ {i} \in \mathscr{C}_ {i}})我们将$\Omega{i}$认定为$\mathscr{C} {i}$">
   
   
     <link rel="icon" href="/favicon.png">
@@ -191,15 +191,31 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="toppra论文阅读（二）"><a href="#toppra论文阅读（二）" class="headerlink" title="toppra论文阅读（二）"></a>toppra论文阅读（二）</h3><h4 id="1-关于toppra各种集合之间的关系"><a href="#1-关于toppra各种集合之间的关系" class="headerlink" title="1.关于toppra各种集合之间的关系"></a>1.关于toppra各种集合之间的关系</h4><h5 id="1-可允许的状态与控制约束"><a href="#1-可允许的状态与控制约束" class="headerlink" title="1). 可允许的状态与控制约束"></a>1). 可允许的状态与控制约束</h5><p>首先定义$i$阶段的可允许的控制状态为：<br>$$<br>\Omega_{i}:=({(u, x) | \mathbf{a}_ {i} u+\mathbf{b}_ {i} x+\mathbf{c}_ {i} \in \mathscr{C}_ {i}})<br>$$<br>我们将$\Omega_{i}$认定为$\mathscr{C}_ {i}$在$\left(\ddot{s}, \dot{s}^{2}\right)$上的一种投射，$\mathscr{C}_ {i}$为原本的约束，即未用参数$s$替换前的广义约束，在通过参数$s$来表达机器人位姿来代替时间参数$t$后，约束也相应的投射为$\Omega_{i}$，具体的变换过程此处不做讨论。</p>
-<p>此外，$i$阶段的允许状态集合是$\Omega_{i}$集合在第二轴上的投射，表示为：<br>$$<br>\mathcal{X}_ {i}:=({x | \exists u:(u, x) \in \Omega_{i})}<br>$$<br>对于给定的$x$，$i$阶段的允许控制集合表示为：<br>$$<br>\mathcal{U}_ {i}(x):=({u |(u, x) \in \Omega_{i})}<br>$$</p>
-<h5 id="2-可达集合"><a href="#2-可达集合" class="headerlink" title="2). 可达集合"></a>2). 可达集合</h5><p>对于$i$阶段的可达集合，可以定义为：假设存在一个初始状态集合$\mathbb{I}_ {0}$，$i$阶段的可达集$\mathcal{L}_ {i}\left(\mathbb{I}_ {0}\right)$是关于状态的集合$x \in \mathcal{X}_ {i}$，同时需要满足存在一个状态$x_{0} \in \mathbb{I}_ {0}$和一个允许的控制序列$u_{0}, \dots, u_{i-1}$，来引导系统由状态$x_{0}$到状态$x$。</p>
-<p>为了计算$i$阶段可达集，需要一些中间表达：假设存在一个状态集合$\mathbb{I}$，到达集$\mathcal{R}_ {i}(\mathbb{I})$是关于状态的集合$x \in \mathcal{X}_ {i+1}$，同时需要满足存在一个状态$\tilde{x} \in \mathbb{I}$和一个允许的控制$u \in \mathcal{U}_ {i}(\tilde{x})$引导系统由状态$\tilde{x}$到状态$x$，即：<br>$$<br>x=\tilde{x}+2 \Delta_{i} u<br>$$<br>到达集$\mathcal{R}<em>{i}(\mathbb{I})$由其最大值和最小值来限制其界限$(x^{-},x^{+})$，其计算方法如下：<br>$$<br>\begin{array}{l}{x^{-}:=\min _{(u, \bar{x}) \in \Omega</em>{i}(\mathbf{I}), x^{-} \in \mathcal{X}_ {i+1}}(\tilde{x}+2 \Delta_{i} u)} \\  {x^{+}:=\max <em>{(u, \bar{x}) \in \Omega</em>{i}(\mathbf{I}), x^{+} \in \mathcal{X}_ {i+1}}(\tilde{x}+2 \Delta_{i} u)}\end{array}<br>$$<br>但是，$x^{+}$可以直接由以下公式表示（具体原因不做讨论）：<br>$$<br>{x^{+}:=\max <em>{(u, \tilde{x}) \in \mathbb{R}^{2}}(\tilde{x}+2 \Delta</em>{i} u)}<br>$$<br>并且满足：$ \mathbf{a}<em>{i} u+\mathbf{b}</em>{i} \tilde{x}+\mathbf{c}<em>{i} \in \mathscr{C}</em>{i}$, $\tilde{x} \in \mathbb{I}$ 与$x^{+} \in \mathcal{X}_{i+1}$。同时，$x^{-}$的计算方式也是相似的。</p>
+        <h3 id="toppra论文阅读（二）"><a href="#toppra论文阅读（二）" class="headerlink" title="toppra论文阅读（二）"></a>toppra论文阅读（二）</h3><h4 id="1-关于toppra各种集合之间的关系"><a href="#1-关于toppra各种集合之间的关系" class="headerlink" title="1.关于toppra各种集合之间的关系"></a>1.关于toppra各种集合之间的关系</h4><h5 id="1-可允许的状态与控制约束"><a href="#1-可允许的状态与控制约束" class="headerlink" title="1). 可允许的状态与控制约束"></a>1). 可允许的状态与控制约束</h5><p>首先定义$i$阶段的可允许的控制状态为：</p>
+<script type="math/tex; mode=display">
+\Omega_{i}:=({(u, x) | \mathbf{a}_ {i} u+\mathbf{b}_ {i} x+\mathbf{c}_ {i} \in \mathscr{C}_ {i}})</script><p>我们将$\Omega<em>{i}$认定为$\mathscr{C}</em> {i}$在$\left(\ddot{s}, \dot{s}^{2}\right)$上的一种投射，$\mathscr{C}<em> {i}$为原本的约束，即未用参数$s$替换前的广义约束，在通过参数$s$来表达机器人位姿来代替时间参数$t$后，约束也相应的投射为$\Omega</em>{i}$，具体的变换过程此处不做讨论。</p>
+<p>此外，$i$阶段的允许状态集合是$\Omega_{i}$集合在第二轴上的投射，表示为：</p>
+<script type="math/tex; mode=display">
+\mathcal{X}_ {i}:=({x | \exists u:(u, x) \in \Omega_{i})}</script><p>对于给定的$x$，$i$阶段的允许控制集合表示为：</p>
+<script type="math/tex; mode=display">
+\mathcal{U}_ {i}(x):=({u |(u, x) \in \Omega_{i})}</script><h5 id="2-可达集合"><a href="#2-可达集合" class="headerlink" title="2). 可达集合"></a>2). 可达集合</h5><p>对于$i$阶段的可达集合，可以定义为：假设存在一个初始状态集合$\mathbb{I}<em> {0}$，$i$阶段的可达集$\mathcal{L}</em> {i}\left(\mathbb{I}<em> {0}\right)$是关于状态的集合$x \in \mathcal{X}</em> {i}$，同时需要满足存在一个状态$x<em>{0} \in \mathbb{I}</em> {0}$和一个允许的控制序列$u<em>{0}, \dots, u</em>{i-1}$，来引导系统由状态$x_{0}$到状态$x$。</p>
+<p>为了计算$i$阶段可达集，需要一些中间表达：假设存在一个状态集合$\mathbb{I}$，到达集$\mathcal{R}<em> {i}(\mathbb{I})$是关于状态的集合$x \in \mathcal{X}</em> {i+1}$，同时需要满足存在一个状态$\tilde{x} \in \mathbb{I}$和一个允许的控制$u \in \mathcal{U}_ {i}(\tilde{x})$引导系统由状态$\tilde{x}$到状态$x$，即：</p>
+<script type="math/tex; mode=display">
+x=\tilde{x}+2 \Delta_{i} u</script><p>到达集$\mathcal{R}_{i}(\mathbb{I})$由其最大值和最小值来限制其界限$(x^{-},x^{+})$，其计算方法如下：</p>
+<script type="math/tex; mode=display">
+\begin{array}{l}{x^{-}:=\min _{(u, \bar{x}) \in \Omega_{i}(\mathbf{I}), x^{-} \in \mathcal{X}_ {i+1}}(\tilde{x}+2 \Delta_{i} u)} \\\\  {x^{+}:=\max _{(u, \bar{x}) \in \Omega_{i}(\mathbf{I}), x^{+} \in \mathcal{X}_ {i+1}}(\tilde{x}+2 \Delta_{i} u)}\end{array}</script><p>但是，$x^{+}$可以直接由以下公式表示（具体原因不做讨论）：</p>
+<script type="math/tex; mode=display">
+{x^{+}:=\max _{(u, \tilde{x}) \in \mathbb{R}^{2}}(\tilde{x}+2 \Delta_{i} u)}</script><p>并且满足：$ \mathbf{a}<em>{i} u+\mathbf{b}</em>{i} \tilde{x}+\mathbf{c}<em>{i} \in \mathscr{C}</em>{i}$, $\tilde{x} \in \mathbb{I}$ 与$x^{+} \in \mathcal{X}_{i+1}$。同时，$x^{-}$的计算方式也是相似的。</p>
 <h5 id="3-可控集合"><a href="#3-可控集合" class="headerlink" title="3). 可控集合"></a>3). 可控集合</h5><p>可控是一种双重的概念，以下定义能进行解释：</p>
-<p>对于$i$阶段的可控集合，可以定义为：假设存在一个最终状态集合$\mathbb{I}<em>{N}$，$i$阶段的可控集$\mathcal{K}</em>{i}\left(\mathbb{I}<em>{N}\right)$是关于状态的集合$x \in \mathcal{X}</em>{i}$，同时需要满足存在一个状态$x_{N} \in \mathbb{I}<em>{N}$和一个允许的控制序列$u</em>{i}, \dots, u_{N-1}$，来引导系统由状态$x$到状态$x_{N}$。</p>
+<p>对于$i$阶段的可控集合，可以定义为：假设存在一个最终状态集合$\mathbb{I}<em>{N}$，$i$阶段的可控集$\mathcal{K}</em>{i}\left(\mathbb{I}<em>{N}\right)$是关于状态的集合$x \in \mathcal{X}</em>{i}$，同时需要满足存在一个状态$x<em>{N} \in \mathbb{I}</em>{N}$和一个允许的控制序列$u<em>{i}, \dots, u</em>{N-1}$，来引导系统由状态$x$到状态$x_{N}$。</p>
 <p>可达集的双重概念是单步集。</p>
 <p>对于$i$阶段的单步集合，可以定义为：假设存在一个状态集合$\mathbb{I}$，$i$阶段的单步集$\mathcal{Q}<em>{i}\left(\mathbb{I}\right)$是关于状态的集合$x \in \mathcal{X}</em>{i}$，同时需要满足存在一个状态$\tilde{x} \in \mathbb{I}$和一个允许的控制$u \in \mathcal{U}_{i}(\tilde{x})$，来引导系统由状态$x$到状态$\tilde{x}$，即：</p>
-<p>$$<br>\tilde{x}=x+2 \Delta_{i} u<br>$$<br>现在可以递归的计算$i$阶段的可控集：<br>$$<br>\begin{aligned} \mathcal{K}<em>{N}\left(\mathbb{I}</em>{N}\right) &amp;=\mathbb{I}<em>{N} \cap \mathcal{X}</em>{N} \\ \mathcal{K}<em>{i}\left(\mathbb{I}</em>{N}\right) &amp;=\mathcal{Q}<em>{i}\left(\mathcal{K}</em>{i+1}\left(\mathbb{I}<em>{N}\right)\right) \end{aligned}<br>$$<br>同到达集$\mathcal{R}</em>{i}(\mathbb{I})$的上下限的计算方式相同，单步集的上下限$(x^{-},x^{+})$可以计算为：<br>$$<br>{x^{+}:=\max <em>{(u, x) \in \mathbb{R}^{2}} x}<br>$$<br>同时需要满足：$ a</em>{i} u+b_{i} x+c_{i} \in \mathscr{C}<em>{i} $与 $x+2 \Delta</em>{i} u \in \mathbb{I}$，$x^{-}$的计算方式也是相似的。</p>
+<script type="math/tex; mode=display">
+\tilde{x}=x+2 \Delta_{i} u</script><p>现在可以递归的计算$i$阶段的可控集：</p>
+<script type="math/tex; mode=display">
+\begin{aligned} \mathcal{K}_{N}\left(\mathbb{I}_{N}\right) &=\mathbb{I}_{N} \cap \mathcal{X}_{N} \\\\ \mathcal{K}_{i}\left(\mathbb{I}_{N}\right) &=\mathcal{Q}_{i}\left(\mathcal{K}_{i+1}\left(\mathbb{I}_{N}\right)\right) \end{aligned}</script><p>同到达集$\mathcal{R}_{i}(\mathbb{I})$的上下限的计算方式相同，单步集的上下限$(x^{-},x^{+})$可以计算为：</p>
+<script type="math/tex; mode=display">
+{x^{+}:=\max _{(u, x) \in \mathbb{R}^{2}} x}</script><p>同时需要满足：$ a<em>{i} u+b</em>{i} x+c<em>{i} \in \mathscr{C}</em>{i} $与 $x+2 \Delta_{i} u \in \mathbb{I}$，$x^{-}$的计算方式也是相似的。</p>
 
       
 
@@ -283,18 +299,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/11/12/intorpolotar插值程序改写及注释/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/11/12/机器人轨迹规划多项式插值/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          intorpolotar插值程序改写及注释
+          机器人轨迹规划多项式插值
         
       </div>
     </a>
   
   
-    <a href="/2019/10/15/toppra论文阅读（一）/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">toppra论文阅读（一）</div>
+    <a href="/2019/10/15/toppra安装步骤及相关问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">toppra安装步骤及相关问题</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -483,11 +499,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">other</a>
+                <a href="javascript:void(0)" class="js-tag color1">robot</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">robot</a>
+                <a href="javascript:void(0)" class="js-tag color1">other</a>
               </li>
              
               <li class="article-tag-list-item">

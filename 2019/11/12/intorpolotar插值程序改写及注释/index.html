@@ -193,23 +193,17 @@
       
         <h3 id="intorpolotar插值程序改写及注释"><a href="#intorpolotar插值程序改写及注释" class="headerlink" title="intorpolotar插值程序改写及注释"></a>intorpolotar插值程序改写及注释</h3><h4 id="1-改写"><a href="#1-改写" class="headerlink" title="1.改写"></a>1.改写</h4><p>PiecewisePolynomialPath是一个用以实线样条插值的类，其中调用了scipy的类scipy.interpolate.PPoly来实现，改写前的报错为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sys:1: DeprecationWarning: `BdbQuit_excepthook` is deprecated since version 5.1</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;test_window.py&quot;, line 168, in &lt;module&gt;</span><br><span class="line">    main()</span><br><span class="line">  File &quot;test_window.py&quot;, line 149, in main</span><br><span class="line">    path_instance = toppra.PiecewisePolynomialPath(coefficient_descend)</span><br><span class="line">AttributeError: &apos;module&apos; object has no attribute &apos;PiecewisePolynomialPath&apos;</span><br></pre></td></tr></table></figure>
-
 <p>可推测为PiecewisePolynomialPath模组缺失，直接添加在interpolator程序中插入PiecewisePolynomialPath类后，报错：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">File &quot;/home/aip/.local/lib/python2.7/site-packages/toppra-0.2.2-py2.7-linux-x86_64.egg/toppra/interpolator.py&quot;, line 597, in __init__</span><br><span class="line">    self.dof = self.shape[2]</span><br><span class="line">AttributeError: can&apos;t set attribute</span><br></pre></td></tr></table></figure>
-
 <p>可以推测为self.dof的属性无法设置，由于PiecewisePolynomialPath类的父类为Interpolator，在Interpolator类中找到self.dof的定义为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@property</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dof</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="string">"""Return the degrees-of-freedom of the path."""</span></span><br><span class="line">    <span class="keyword">raise</span> NotImplementedError</span><br></pre></td></tr></table></figure>
-
 <p>可见该处加上了@property的只读属性，因此注释掉@property，运行程序，报错：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">File&quot;/home/aip/.local/lib/python2.7/sitepackages/toppra-0.2.2-py2.7-linux-x86_64.egg/toppra/interpolator.py&quot;, line 73, in get_dof</span><br><span class="line">    raise NotImplementedError</span><br><span class="line">NotImplementedError</span><br></pre></td></tr></table></figure>
-
 <p>可见interpolator程序73行get_dof方法抛出异常，查看其代码为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def get_dof(self):</span><br><span class="line">        # type: () -&gt; int</span><br><span class="line">        &quot;&quot;&quot;Return the degree-of-freedom of the path.</span><br><span class="line"></span><br><span class="line">        Returns</span><br><span class="line">        -------</span><br><span class="line">        out:</span><br><span class="line">            Degree-of-freedom of the path.</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        raise NotImplementedError</span><br></pre></td></tr></table></figure>
-
 <p>该处为定义get_dof方法，只进行了一个方法名称的声明，因此加上return self.dof具体命令，并注释掉raise NotImplementedError后，运行程序，成功运行起rrt实例程序。</p>
 <h4 id="2-注释"><a href="#2-注释" class="headerlink" title="2.注释"></a>2.注释</h4><p>注释后代码实例如下</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PiecewisePolynomialPath</span><span class="params">(Interpolator)</span>:</span></span><br><span class="line">    <span class="string">""" A class that can generate piecewise polynomial paths, including position, speed and acceleration, calling the class scipy.interpolate.PPoly</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    Parameters</span></span><br><span class="line"><span class="string">    ----------</span></span><br><span class="line"><span class="string">    poly_coeff_set : ndarray, shape (degree_poly, amount_segment, amount_dof)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        degree_poly : the coefficients of the polynomials, containing the starting and ending angles of robot joints in each line segment</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        amount_segment: the number of connections between adjacent nodes in the final path generated in RRT algorithm</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        amount_dof: DOF of robot</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    s_waypoints: ndarray</span></span><br><span class="line"><span class="string">        Number of the waypoints.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, poly_coeff_set)</span>:</span></span><br><span class="line">        self.poly_coeff_set = np.array(poly_coeff_set)</span><br><span class="line">        self.shape = np.array(self.poly_coeff_set.shape)</span><br><span class="line">        self.amount_segment = self.shape[<span class="number">1</span>]</span><br><span class="line">        self.dof = self.shape[<span class="number">2</span>]</span><br><span class="line">        self.degree_poly = self.shape[<span class="number">0</span>]</span><br><span class="line">        self.s_start = <span class="number">0</span></span><br><span class="line">        self.s_end = self.amount_segment</span><br><span class="line">        self.duration = self.amount_segment</span><br><span class="line">        self.s_waypoint = np.arange(<span class="number">0</span>, self.duration+<span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        self.picecwise_poly = PPoly(self.poly_coeff_set, self.s_waypoint)</span><br><span class="line">        self.picecwise_poly_s = self.picecwise_poly.derivative()</span><br><span class="line">        self.picecwise_poly_ss = self.picecwise_poly_s.derivative()</span><br><span class="line">        <span class="keyword">import</span> ipdb; ipdb.set_trace()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_duration</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.duration</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">eval</span><span class="params">(self, s_sample)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.picecwise_poly(s_sample)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">evald</span><span class="params">(self, s_sample)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.picecwise_poly_s(s_sample)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">evaldd</span><span class="params">(self, s_sample)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.picecwise_poly_ss(s_sample)</span><br></pre></td></tr></table></figure>
-
 
       
 
@@ -293,18 +287,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/11/12/机器人轨迹规划多项式插值/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/11/19/rapid-transport安装调试/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          机器人轨迹规划多项式插值
+          toppra安装步骤及相关问题
         
       </div>
     </a>
   
   
-    <a href="/2019/10/22/toppra论文阅读（二）/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">toppra论文阅读（二）</div>
+    <a href="/2019/11/12/机器人轨迹规划多项式插值/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">机器人轨迹规划多项式插值</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -493,11 +487,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">other</a>
+                <a href="javascript:void(0)" class="js-tag color1">robot</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">robot</a>
+                <a href="javascript:void(0)" class="js-tag color1">other</a>
               </li>
              
               <li class="article-tag-list-item">

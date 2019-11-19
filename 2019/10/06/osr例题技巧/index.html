@@ -198,15 +198,24 @@
 <h3 id="2-如何指定某个特定的box"><a href="#2-如何指定某个特定的box" class="headerlink" title="2.如何指定某个特定的box"></a>2.如何指定某个特定的box</h3><p>例题中，box是一个osr环境中的实体，生成后被全部存储在列表boxes中，若需要指定某个特定的box,可通过命令<code>boxes[20]</code>来实现，[  ]中为指定box的序号，box能使用的所有方法均适用于<code>boxes[20]</code></p>
 <h3 id="3-调用方法时的注意事项"><a href="#3-调用方法时的注意事项" class="headerlink" title="3.调用方法时的注意事项"></a>3.调用方法时的注意事项</h3><p>在调用方法时，一定要在某方法的末尾加上括号，如</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">box.GetTransform()</span><br></pre></td></tr></table></figure>
-
 <p>若不加括号，不会返回正常值，会返回</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;bound method KinBody.GetTransform of RaveGetEnvironment(1).GetKinBody(&apos;box40&apos;)&gt;</span><br></pre></td></tr></table></figure>
-
 <p>在加上括号后则会返回正常值。</p>
 <h3 id="4-获取抓取目标的旋转矩阵方法"><a href="#4-获取抓取目标的旋转矩阵方法" class="headerlink" title="4.获取抓取目标的旋转矩阵方法"></a>4.获取抓取目标的旋转矩阵方法</h3><p>对于每一个抓取目标，都需要获取其旋转矩阵与空间位置参数，空间位置参数很好获得，目标的原始旋转矩阵也能获得，因为每个目标都是一个实体，直接调用方法获得相关参数即可。</p>
 <p>但是，获取的空间位置参数是唯一对应的，但旋转举证需要作一些修正才能作为ikfast求解器的目标求解矩阵。因为每一个box的旋转矩阵如下:</p>
 <p><img src="/2019/10/06/osr例题技巧/1.png" alt="1"></p>
-<p>由于box的旋转矩阵$T_b$轴是朝上的，但是对于机器人末端，ikfst求解器需要得到的旋转矩阵$T_k$是Z轴朝下的，这样才能获取正常的求解，同时不能只修改旋转矩阵$T_b$的Z轴使其朝下，需要通过绕X轴旋转的方式来获得Z轴朝下的旋转矩阵$T_k$，因此，需要将原box旋转矩阵右乘一个变换矩阵$T_s$，得到最终ikfast求解器需要的矩阵：<br>$$<br>T_k=T_b\cdot T_a<br>$$<br>其中:<br>$$<br>T_b = \left[<br>\matrix{<br>  1 &amp; 0 &amp; 0 &amp; 0\\<br>  0 &amp; -1 &amp; 0 &amp; 0\\<br>  0 &amp; 0 &amp; -1 &amp; 0\\<br>  0 &amp; 0 &amp; 0 &amp; 1<br>}<br>\right]<br>$$<br>旋转后的矩阵$T_b$如下：</p>
+<p>由于box的旋转矩阵$T_b$轴是朝上的，但是对于机器人末端，ikfst求解器需要得到的旋转矩阵$T_k$是Z轴朝下的，这样才能获取正常的求解，同时不能只修改旋转矩阵$T_b$的Z轴使其朝下，需要通过绕X轴旋转的方式来获得Z轴朝下的旋转矩阵$T_k$，因此，需要将原box旋转矩阵右乘一个变换矩阵$T_s$，得到最终ikfast求解器需要的矩阵：</p>
+<script type="math/tex; mode=display">
+T_k=T_b\cdot T_a</script><p>其中:</p>
+<script type="math/tex; mode=display">
+T_b = \left[
+\matrix{
+  1 & 0 & 0 & 0\\\\
+  0 & -1 & 0 & 0\\\\
+  0 & 0 & -1 & 0\\\\
+  0 & 0 & 0 & 1
+}
+\right]</script><p>旋转后的矩阵$T_b$如下：</p>
 <p><img src="/2019/10/06/osr例题技巧/2.png" alt="2"></p>
 
       
@@ -491,11 +500,11 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">other</a>
+                <a href="javascript:void(0)" class="js-tag color1">robot</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">robot</a>
+                <a href="javascript:void(0)" class="js-tag color1">other</a>
               </li>
              
               <li class="article-tag-list-item">

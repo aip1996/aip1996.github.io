@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | AIP&#39;s bolg</title>
+  <title>toppra安装步骤及相关问题 | AIP&#39;s bolg</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="AIP&#39;s bolg">
-<meta property="og:url" content="http://yoursite.com/archives/page/2/index.html">
+  <meta name="description" content="rapid-transport安装调试1.rapid-transport介绍quick-transport是2019年ICRA的论文 “Critically fast pick-and-place with suction cups” 附带的源代码。quick-transport实现了一种运动计划管道方法，可为物体运输提供快速而可靠的运动。  “Critically fast pick-and-p">
+<meta name="keywords" content="robot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="toppra安装步骤及相关问题">
+<meta property="og:url" content="http://yoursite.com/2019/11/19/rapid-transport安装调试/index.html">
 <meta property="og:site_name" content="AIP&#39;s bolg">
+<meta property="og:description" content="rapid-transport安装调试1.rapid-transport介绍quick-transport是2019年ICRA的论文 “Critically fast pick-and-place with suction cups” 附带的源代码。quick-transport实现了一种运动计划管道方法，可为物体运输提供快速而可靠的运动。  “Critically fast pick-and-p">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2019/11/19/rapid-transport安装调试/1.png">
+<meta property="og:updated_time" content="2019-11-19T13:59:58.318Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AIP&#39;s bolg">
+<meta name="twitter:title" content="toppra安装步骤及相关问题">
+<meta name="twitter:description" content="rapid-transport安装调试1.rapid-transport介绍quick-transport是2019年ICRA的论文 “Critically fast pick-and-place with suction cups” 附带的源代码。quick-transport实现了一种运动计划管道方法，可为物体运输提供快速而可靠的运动。  “Critically fast pick-and-p">
+<meta name="twitter:image" content="http://yoursite.com/2019/11/19/rapid-transport安装调试/1.png">
   
   
     <link rel="icon" href="/favicon.png">
@@ -166,36 +173,54 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-rapid-transport安装调试" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/25/机器人路径规划—PRM与RRT/" class="archive-article-date">
-  	<time datetime="2019-08-25T10:33:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/25/机器人路径规划—PRM与RRT/">机器人路径规划—PRM与RRT</a>
+    <h1 class="article-title" itemprop="name">
+      toppra安装步骤及相关问题
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/11/19/rapid-transport安装调试/" class="archive-article-date">
+  	<time datetime="2019-11-19T12:30:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="rapid-transport安装调试"><a href="#rapid-transport安装调试" class="headerlink" title="rapid-transport安装调试"></a>rapid-transport安装调试</h3><h4 id="1-rapid-transport介绍"><a href="#1-rapid-transport介绍" class="headerlink" title="1.rapid-transport介绍"></a>1.rapid-transport介绍</h4><p>quick-transport是2019年ICRA的论文 “Critically fast pick-and-place with suction cups” 附带的源代码。quick-transport实现了一种运动计划管道方法，可为物体运输提供快速而可靠的运动。</p>
+<p> “Critically fast pick-and-place with suction cups” 论文链接: <a href="http://arxiv.org/abs/1809.03151" target="_blank" rel="noopener">http://arxiv.org/abs/1809.03151</a></p>
+<p>quick-transport源码github地址:<a href="https://github.com/hungpham2511/rapid-transport" target="_blank" rel="noopener">https://github.com/hungpham2511/rapid-transport</a></p>
+<h4 id="2-rapid-transport安装"><a href="#2-rapid-transport安装" class="headerlink" title="2. rapid-transport安装"></a>2. rapid-transport安装</h4><p> rapid-transport 代码包有两个主要依赖： <a href="https://github.com/hungpham2511/toppra" target="_blank" rel="noopener"><code>toppra</code></a> 和 <a href="https://github.com/rdiankov/openrave" target="_blank" rel="noopener"><code>OpenRAVE</code></a> </p>
+<p>toppra和Openrave的安装方法已经非常清楚，此处略过</p>
+<p>rapid-transport安装代码，ubuntu终端执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/hungpham2511/rapid-transport &amp;&amp; cd rapid-transport</span><br><span class="line">pip install -r requirements.txt --user</span><br><span class="line">python setup.py develop --user</span><br></pre></td></tr></table></figure>
+<h4 id="3-rapid-transport运行实例"><a href="#3-rapid-transport运行实例" class="headerlink" title="3.rapid-transport运行实例"></a>3.rapid-transport运行实例</h4><p> rapid-transport 提供了两个可以执行的实例程序: 1) generate_contact_constraint.py 和2) transport.paper pick-demo。但是经过验证实例2）由于缺少依赖库denso_control与raveutils，其中raveutils包可以找到源码，安装方式附文章末尾，但denso_control包作者未开源，无法安装，因此该实例无法运行</p>
+<h5 id="1-generate-contact-constraint-py运行"><a href="#1-generate-contact-constraint-py运行" class="headerlink" title="1).generate_contact_constraint.py运行"></a>1).generate_contact_constraint.py运行</h5><p>在rapid-transport文件目录下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python scripts/generate_contact_constraint.py</span><br></pre></td></tr></table></figure>
+<p>运行结果为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">begin -----------------</span><br><span class="line"></span><br><span class="line">analytical_rigid1234:</span><br><span class="line">  attached_to_manipulator: denso_suction_cup2</span><br><span class="line">  constraint_coeffs_file: analytical_rigid1234.npz</span><br><span class="line">  id: analytical_rigid1234</span><br><span class="line">  orientation:</span><br><span class="line">  - [1, 0, 0]</span><br><span class="line">  - [0, 1, 0]</span><br><span class="line">  - [0, 0, 1]</span><br><span class="line">  params: &#123;N: 6, PA: 22.0, fmax: 33.333333333333336, mu: 0.3, r: 0.0125, simplify: true&#125;</span><br><span class="line">  position: [0, 0, 0]</span><br><span class="line"></span><br><span class="line">end--------</span><br></pre></td></tr></table></figure>
+<p>并得到以下图片：</p>
+<p><img src="/2019/11/19/rapid-transport安装调试/1.png" alt="1"></p>
+<h5 id="2-raveutils安装"><a href="#2-raveutils安装" class="headerlink" title="2).raveutils安装"></a>2).raveutils安装</h5><p>raveutils安装依赖与ros与Openrave，安装方式此处不再叙述</p>
+<p>raveutils安装代码：</p>
+<p>首先创建ros的工作区catkin_ws并创建src文件夹，并cd到src文件夹下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ~/catkin_ws &amp;&amp; catkin_make</span><br></pre></td></tr></table></figure>
+<p>测试安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">source ~/catkin_ws/devel/setup.bash</span><br><span class="line">roscd raveutils/tests</span><br><span class="line">nosetests -v</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -207,60 +232,147 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/19/rapid-transport安装调试/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/13/hello-world/" class="archive-article-date">
-  	<time datetime="2019-08-13T15:28:42.377Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-13</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/12/intorpolotar插值程序改写及注释/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">intorpolotar插值程序改写及注释</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/13/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">other</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#rapid-transport安装调试"><span class="toc-number">1.</span> <span class="toc-text">rapid-transport安装调试</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-rapid-transport介绍"><span class="toc-number">1.1.</span> <span class="toc-text">1.rapid-transport介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-rapid-transport安装"><span class="toc-number">1.2.</span> <span class="toc-text">2. rapid-transport安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-rapid-transport运行实例"><span class="toc-number">1.3.</span> <span class="toc-text">3.rapid-transport运行实例</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-generate-contact-constraint-py运行"><span class="toc-number">1.3.1.</span> <span class="toc-text">1).generate_contact_constraint.py运行</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-raveutils安装"><span class="toc-number">1.3.2.</span> <span class="toc-text">2).raveutils安装</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
+        
+    </div>
+</aside>
+
+
+
   
 
+  
+    <section id="comments" class="comments">
+      <style>
+        .comments{margin:30px;padding:10px;background:#fff}
+        @media screen and (max-width:800px){.comments{margin:auto;padding:10px;background:#fff}}
+      </style>
+      <div id="vcomment" class="comment"></div> 
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+   var notify = 'true' == true ? true : false;
+   var verify = 'false' == true ? true : false;
+    window.onload = function() {
+        new Valine({
+            el: '.comment',
+            notify: notify,
+            verify: verify,
+            app_id: "3bvqrXP3o8Hx4CBTRCcAI22b-gzGzoHsz",
+            app_key: "N4eohbF8Sy19cWTRFTGK7ihh",
+            placeholder: "Just go go",
+            avatar:"mm"
+        });
+    }
+</script>
+      </section>
     
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-    </nav>
+  
+  
+  
+  
+
+  
+
+  
+
   
 
 
@@ -284,8 +396,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
