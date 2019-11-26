@@ -168,6 +168,105 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-机器人学基础——力旋量" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/26/机器人学基础——力旋量/">机器人路径规划—PRM与RRT</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/26/机器人学基础——力旋量/" class="archive-article-date">
+  	<time datetime="2019-11-26T14:18:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="机器人学基础——力旋量"><a href="#机器人学基础——力旋量" class="headerlink" title="机器人学基础——力旋量"></a>机器人学基础——力旋量</h3><h4 id="1-力旋量的定义"><a href="#1-力旋量的定义" class="headerlink" title="1.力旋量的定义"></a>1.力旋量的定义</h4><p> 考虑作用于<strong>r</strong>点上刚体的线性力<strong>f</strong>。定义一个参考系{a}，点<strong>r</strong>可以表示为$r<em>{a} \in \mathbb{R}^{3}$，力<strong>f</strong>可以表示为$f</em>{a} \in \mathbb{R}^{3}$。这个力在参考系{a}中创建了一个转矩或力矩$m_{a} \in \mathbb{R}^{3}$: </p>
+<script type="math/tex; mode=display">
+m_{a}= r_{a}  \times  f_{a}​</script><p> 注意，力沿作用线的施加点是重要的。 </p>
+<p><img src="/2019/11/26/机器人学基础——力旋量/1.png" alt="1"></p>
+<p>图1：力旋量表示法$\mathcal{F}<em>{a}$与$\mathcal{F}</em>{b}$之间的关系  </p>
+<p>正如扭转一样，我们可以在{a}坐标系里用$\mathcal{F}_{a}$表示力矩和力合并成一个单独的六维空间力，或者的力旋量:</p>
+<script type="math/tex; mode=display">
+\mathcal{F}_{a}=\left[\begin{array}{c}{m_{a}} \\ {f_{a}}\end{array}\right] \in \mathbb{R}^{6}</script><p>如果一个以上的力旋量作用在一个刚体上，只要扳手在同一坐标系中表示，那么在刚体上的总力旋量就是各个力旋量的矢量和。带有零线性分量的力旋量称为纯力矩。 </p>
+<p>如果$T<em>{ab}$已知，则{a}坐标系中的力旋量可以用另一坐标系{b}表示(图1)。推导出$\mathcal{F}</em>{a}$和$\mathcal{F}_{b}$之间关系的一种方法是推导出单个力和力矩矢量之间的适当的变换。 </p>
+<p>一种更简单和更深刻的方式获得$\mathcal{F}<em>{a}$和$\mathcal{F}</em>{b}$之间的关系, 是使用我们已经推导出的关于相同扭转的表征$\mathcal{V}<em>{a}$和$\mathcal{V}</em>{b}$的结果 ,  利用$（\mathcal{F}，\mathcal{V}）$产生能力必须是相同的这一事实，不考虑它所代表的坐标系 。因此，我们知道：</p>
+<script type="math/tex; mode=display">
+\mathcal{V}_{b}^{\mathrm{T}} \mathcal{F}_{b}=\mathcal{V}_{a}^{\mathrm{T}} \mathcal{F}_{a}</script><script type="math/tex; mode=display">
+\begin{aligned} \mathcal{V}_{b}^{\mathrm{T}} \mathcal{F}_{b} &=\left(\left[\mathrm{Ad}_{T_{a b}}\right] \mathcal{V}_{b}\right)^{\mathrm{T}} \mathcal{F}_{a} \\ &=\mathcal{V}_{b}^{\mathrm{T}}\left[\mathrm{Ad}_{T_{a b}}\right]^{\mathrm{T}} \mathcal{F}_{a} \end{aligned}</script><script type="math/tex; mode=display">
+\begin{array}{l}{\mathcal{F}_{b}=\left[\mathrm{Ad}_{T_{a b}}\right]^{\mathrm{T}} \mathcal{F}_{a}} \\ {\mathcal{F}_{a}=\left[\mathrm{Ad}_{T_{b a}}\right]^{\mathrm{T}} \mathcal{F}_{b}}\end{array}</script><p>给出一个力旋量<strong>F</strong>，在{a}中表示为$\mathcal{F}<em>{a}$，在{b}中表示为$\mathcal{F}</em>{b}$，这两个表述是相关的</p>
+<script type="math/tex; mode=display">
+\begin{aligned} \mathcal{F}_{b} &=\operatorname{Ad}_{T_{a b}}^{\mathrm{T}}\left(\mathcal{F}_{a}\right)=\left[\mathrm{Ad}_{T_{a b}}\right]^{\mathrm{T}} \mathcal{F}_{a} \\ \mathcal{F}_{a} &=\operatorname{Ad}_{T_{b a}}^{\mathrm{T}}\left(\mathcal{F}_{b}\right)=\left[\mathrm{Ad}_{T_{b a}}\right]^{\mathrm{T}} \mathcal{F}_{b} \end{aligned}</script><p>由于我们通常有一个固定的空间坐标系{s}和一个本体坐标系{b}，我们可以定义一个空间力旋量$\mathcal{F}<em>{s}$和一个本体力旋量扳手$\mathcal{F}</em>{b}$。</p>
+<h4 id="2-力旋量算例"><a href="#2-力旋量算例" class="headerlink" title="2.力旋量算例"></a>2.力旋量算例</h4><p>下图中的机械手在重力场$g=10 \mathrm{m} / \mathrm{s}^{2}$(四舍五入以保持数字简单)的作用下，拿着一个质量为0.1kg的苹果向下移动。手的质量是0.5kg。手和机械手之间的六轴力-力矩传感器测量的力和力矩是多少? </p>
+<p><img src="/2019/11/26/机器人学基础——力旋量/2.png" alt="2"></p>
+<p>我们在力-力矩传感器处定义坐标系{f}，在手的质心处定义坐标系{h}，在苹果的质心处定义坐标系{a}。根据图中的坐标轴，{h}中手的重力力旋量由列向量给出 </p>
+<script type="math/tex; mode=display">
+\mathcal{F}_{h}=(0,0,0,0,-5 \mathrm{N}, 0)</script><p> 在{a}中，苹果上的重力力旋量是 </p>
+<script type="math/tex; mode=display">
+\mathcal{F}_{h}=(0,0,0,0,0, 1 \mathrm{N})</script><p>假设L = 10cm和L = 15cm，变换矩阵为${T}<em>{hf}$和${T}</em>{af}$，</p>
+<script type="math/tex; mode=display">
+T_{h f}=\left[\begin{array}{cccc}{1} & {0} & {0} & {-0.1 \mathrm{m}} \\ {0} & {1} & {0} & {0} \\ {0} & {0} & {1} & {0} \\ {0} & {0} & {0} & {1}\end{array}\right], \quad T_{a f}=\left[\begin{array}{cccc}{1} & {0} & {0} & {-0.25 \mathrm{m}} \\ {0} & {0} & {1} & {0} \\ {0} & {-1} & {0} & {0} \\ {0} & {0} & {0} & {1}\end{array}\right]</script><p> 六轴力-力矩传感器测得的力旋量为 </p>
+<script type="math/tex; mode=display">
+\begin{aligned} \mathcal{F}_{f} &=\left[\mathrm{Ad}_{T_{h f}}\right]^{\mathrm{T}} \mathcal{F}_{h}+\left[\mathrm{Ad}_{T_{a f}}\right]^{\mathrm{T}} \mathcal{F}_{a} \\ &=[0\ 0\ -0.5 \mathrm{Nm} \ 0\ -5 \mathrm{N} \ 0]^{\mathrm{T}}+[0\ 0\ -0.25\mathrm{Nm} \ 0\ -1 \mathrm{N} \ 0]^{\mathrm{T}} \\ &=[0\ 0\ -0.75 \mathrm{Nm} \ 0-6 \mathrm{N} \ 0]^{\mathrm{T}} \end{aligned}</script>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">robot</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/26/机器人学基础——力旋量/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-rapid-transport安装调试" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -989,90 +1088,6 @@ T_b = \left[
 
 
   
-    <article id="post-为hexo博文添加图片" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/25/为hexo博文添加图片/">为hexo博文添加图片</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/25/为hexo博文添加图片/" class="archive-article-date">
-  	<time datetime="2019-08-25T10:43:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-首先"><a href="#1-首先" class="headerlink" title="1.首先"></a>1.首先</h1><p>此方法可以解决hexo的md博文上传图片失败的方法，仅本人测试有效，若测试有问题，欢迎在文章下评论。</p>
-<h2 id="1-1-设置站点配置-config-yml"><a href="#1-1-设置站点配置-config-yml" class="headerlink" title="1.1 设置站点配置_config.yml"></a>1.1 设置站点配置_config.yml</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">post_asset_folder: true</span><br></pre></td></tr></table></figure>
-<h2 id="1-2-安装插件"><a href="#1-2-安装插件" class="headerlink" title="1.2 安装插件"></a>1.2 安装插件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install https://github.com/CodeFalling/hexo-asset-image -- save</span><br></pre></td></tr></table></figure>
-<h2 id="1-3-下次再运行hexo-n-“xxxx”来生成md博文时，下路径"><a href="#1-3-下次再运行hexo-n-“xxxx”来生成md博文时，下路径" class="headerlink" title="1.3 下次再运行hexo n “xxxx”来生成md博文时，下路径"></a>1.3 下次再运行hexo n “xxxx”来生成md博文时，下路径</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/source/_posts</span><br></pre></td></tr></table></figure>
-<p>文件夹内除了xxxx.md文件还有一个同名的文件夹，在xxxx.md中想引入图片时，先把图片复制到xxxx这个文件夹中，然后只需要在xxxx.md中按照markdown的格式引入图片。</p>
-<h1 id="2-添加图片"><a href="#2-添加图片" class="headerlink" title="2.添加图片"></a>2.添加图片</h1><p>首先大家可以查看hexo官方文档<a href="https://hexo.io/zh-cn/docs/asset-folders.html" target="_blank" rel="noopener">资源文件夹章节</a></p>
-<h2 id="2-1-markdown添加"><a href="#2-1-markdown添加" class="headerlink" title="2.1 markdown添加"></a>2.1 markdown添加</h2><p>相对路径添加（注意文件相对路径前不加文件夹路径，直接写图片名称就行，xxx.jpg是放在之前生成的xxxx文件夹下的文件名）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#直接写图片名就好了，例如</span><br><span class="line">![图片名称](xxx.jpg)</span><br></pre></td></tr></table></figure>
-<h2 id="2-2-测试是否成功"><a href="#2-2-测试是否成功" class="headerlink" title="2.2 测试是否成功"></a>2.2 测试是否成功</h2><p>通过命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
-<p>本地测试图片是否成功添加</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">other</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/25/为hexo博文添加图片/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1191,15 +1206,15 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">robot</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">other</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">robot</a>
               </li>
             
             <div class="clearfix"></div>
